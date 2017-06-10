@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using Digital.Models;
+using System;
 
 namespace Digital.Data
 {
-    public interface IProductRepository
+    public interface IProductRepository : IDisposable
     {
         void DeleteProduct(int productID);
         Product GetProductByID(int id);

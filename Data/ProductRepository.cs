@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Digital.Data
 {
-    public class ProductRepository : IDisposable
+    public class ProductRepository : IDisposable, IProductRepository
     {
         private ApplicationDbContext context;
-        ProductRepository(ApplicationDbContext context)
+        public ProductRepository(ApplicationDbContext context)
         {
             this.context = context;
         }

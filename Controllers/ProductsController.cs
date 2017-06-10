@@ -14,9 +14,9 @@ namespace Digital.Controllers
     [Route("api/Products")]
     public class ProductsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IProductRepository _context;
 
-        public ProductsController(ApplicationDbContext context)
+        public ProductsController(IProductRepository context)
         {
             _context = context;
         }
@@ -25,19 +25,19 @@ namespace Digital.Controllers
         [HttpGet]
         public IEnumerable<Product> GetProducts()
         {
-            return _context.Products;
+            return _context.GetProducts();
         }
 
         // GET: api/Products/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetProduct([FromRoute] int id)
+        public IActionResult GetProduct([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var product = await _context.Products.SingleOrDefaultAsync(m => m.ProductID == id);
+            var product = _context.GetProductByID(id);
 
             if (product == null)
             {
@@ -49,7 +49,7 @@ namespace Digital.Controllers
 
         // PUT: api/Products/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProduct([FromRoute] int id, [FromBody] Product product)
+        public IActionResult PutProduct([FromRoute] int id, [FromBody] Product product)
         {
             if (!ModelState.IsValid)
             {
@@ -61,22 +61,15 @@ namespace Digital.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(product).State = EntityState.Modified;
+            _context.UpdateProduct(product);
 
             try
             {
-                await _context.SaveChangesAsync();
+                _context.Save();
             }
             catch (DbUpdateConcurrencyException)
-            {
-                if (!ProductExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
+            {            
                     throw;
-                }
             }
 
             return NoContent();
@@ -84,43 +77,39 @@ namespace Digital.Controllers
 
         // POST: api/Products
         [HttpPost]
-        public async Task<IActionResult> PostProduct([FromBody] Product product)
+        public IActionResult PostProduct([FromBody] Product product)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Products.Add(product);
-            await _context.SaveChangesAsync();
+            _context.InsertProduct(product);
+             _context.Save();
 
             return CreatedAtAction("GetProduct", new { id = product.ProductID }, product);
         }
 
         // DELETE: api/Products/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProduct([FromRoute] int id)
+        public IActionResult DeleteProduct([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var product = await _context.Products.SingleOrDefaultAsync(m => m.ProductID == id);
+            var product = _context.GetProductByID(id);
             if (product == null)
             {
                 return NotFound();
             }
 
-            _context.Products.Remove(product);
-            await _context.SaveChangesAsync();
+            _context.DeleteProduct(product.ProductID);
+             _context.Save();
 
             return Ok(product);
         }
 
-        private bool ProductExists(int id)
-        {
-            return _context.Products.Any(e => e.ProductID == id);
-        }
     }
 }

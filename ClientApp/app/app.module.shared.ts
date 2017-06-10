@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './components/app/app.component'
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
@@ -8,6 +9,7 @@ import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { HelloWorldComponent } from './components/helloworld/helloworld.component';
 import { WeatherComponent } from './components/weather/weather.component';
+import { RegisterComponent } from './components/register/register.component';
 
 export const sharedConfig: NgModule = {
     bootstrap: [ AppComponent ],
@@ -18,9 +20,11 @@ export const sharedConfig: NgModule = {
         FetchDataComponent,
         HomeComponent,
         HelloWorldComponent,
-        WeatherComponent
+        WeatherComponent,
+        RegisterComponent
     ],
     imports: [
+        FormsModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
@@ -28,6 +32,7 @@ export const sharedConfig: NgModule = {
             { path: 'fetch-data', component: FetchDataComponent },
             { path: 'hello', component: HelloWorldComponent },
             { path: 'weather', component: WeatherComponent },
+            { path: 'register', component: RegisterComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ]

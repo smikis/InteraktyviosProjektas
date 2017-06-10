@@ -1,10 +1,12 @@
 ﻿
 using Digital.Models;
+using Digital.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Digital.Controllers
@@ -13,11 +15,17 @@ namespace Digital.Controllers
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IAuthenticationService _authenticationService;
+        private readonly IRolesService _rolesService;
         private readonly ILogger _logger;
-        public AccountController(UserManager<ApplicationUser> userManager, ILoggerFactory loggerFactory)
+        public AccountController(UserManager<ApplicationUser> userManager, ILoggerFactory loggerFactory, SignInManager<ApplicationUser> signInManager, IAuthenticationService authenticationService, IRolesService rolesService)
         {
             _userManager = userManager;
             _logger = loggerFactory.CreateLogger<AccountController>();
+            _signInManager = signInManager;
+            _authenticationService = authenticationService;
+            _rolesService = rolesService;
         }
 
         [HttpPost("[action]")]
@@ -36,6 +44,62 @@ namespace Digital.Controllers
                 GetErrors(result);
             }
             return BadRequest(GetErrors());
+        }
+
+        [HttpPost("[action]")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Login(Login model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, true, lockoutOnFailure: false);
+                if (result.Succeeded)
+                {                 
+                    _logger.LogInformation(1, "Logged in. Generating token");
+                    var user = _userManager.GetUserAsync(HttpContext.User).Result;
+                    await _userManager.AddToRoleAsync(user, "User");
+                    var token = _authenticationService.GetAuthorizationToken(user);
+                    return Ok(token);
+                }
+                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+            }
+            return BadRequest(GetErrors());
+        }
+
+        [HttpGet("[action]")]
+        [AllowAnonymous]
+        public async Task<IActionResult> CreateRoles()
+        {
+            await _rolesService.GenerateRoles();
+            return Ok("Roles created");
+        }
+
+        [HttpGet("[action]")]
+        [Authorize("Bearer", Roles = "Administrator")]
+        public IActionResult TestAdmin()
+        {
+            _rolesService.GenerateRoles();
+            return Ok("Roles created");
+        }
+
+        [HttpGet("[action]")]
+        [Authorize("Bearer", Roles = "User")]
+        public IActionResult TestUser()
+        {
+            _rolesService.GenerateRoles();
+            return Ok("Roles created");
+        }
+
+        [Authorize("Bearer")]
+        [HttpGet("claims")]
+        public object Claims()
+        {
+            return User.Claims.Select(c =>
+            new
+            {
+                Type = c.Type,
+                Value = c.Value
+            });
         }
 
         private List<string> GetErrors()

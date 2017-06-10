@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,6 +12,11 @@ using Digital.Data;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Digital.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Digital.Helpers;
+using Microsoft.IdentityModel.Tokens;
+using Digital.Services;
 
 namespace Digital
 {
@@ -40,7 +45,15 @@ namespace Digital
                 .AddDefaultTokenProviders();
 
             services.AddTransient<IProductRepository, ProductRepository>();
-      
+            services.AddTransient<IAuthenticationService, AuthenticationService>();
+            services.AddTransient<IRolesService, RolesService>();
+            services.AddAuthorization(auth =>
+            {
+                auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
+                    .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme‌​)
+                    .RequireAuthenticatedUser().Build());
+            });
+
             // Add framework services.
             services.AddMvc();
         }
@@ -65,6 +78,20 @@ namespace Digital
 
             app.UseStaticFiles();
             app.UseIdentity();
+
+            app.UseJwtBearerAuthentication(new JwtBearerOptions()
+            {
+                TokenValidationParameters = new TokenValidationParameters()
+                {
+                    IssuerSigningKey = Helpers.AuthenticationOptions.Key,
+                    ValidAudience = Helpers.AuthenticationOptions.Audience,
+                    ValidIssuer = Helpers.AuthenticationOptions.Issuer,                   
+                    ValidateIssuerSigningKey = true,                   
+                    ValidateLifetime = true,                
+                    ClockSkew = TimeSpan.FromMinutes(1)
+                }
+            });
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

@@ -1,26 +1,41 @@
 ﻿<div class="container">
     <h1>Register</h1>
-    <form>
+    <form (ngSubmit)="onSubmit()" #registerForm="ngForm">  
         <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" required>
+            <input type="text" class="form-control" id="name" required  minlength="2" maxlength="15" [(ngModel)]="model.name" name="name" #name="ngModel">
+            <div *ngIf="name.hasError('required') && (name.touched || name.dirty)" class="alert alert-danger">You must include first name.</div>
+            <div *ngIf="name.hasError('minlength') && name.touched" class="alert alert-danger">Your first name must be at least 2 characters long.</div>
+            <div *ngIf="name.hasError('maxlength') && name.touched" class="alert alert-danger">Your first name cannot exceed 15 characters.</div>
         </div>
         <div class="form-group">
             <label for="lastName">Last Name</label>
-            <input type="text" class="form-control" id="lastName">
+            <input type="text" class="form-control" id="lastName" [(ngModel)]="model.lastName"  name="lastName">
         </div>
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" class="form-control" id="email">
+            <input type="email" class="form-control" id="email" required [(ngModel)]="model.email"  name="email" #email="ngModel" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+            <div *ngIf="email.hasError('required') && (email.touched || email.dirty)" class="alert alert-danger">You must include email.</div>
+            <div *ngIf="email.hasError('pattern') && email.touched" class="alert alert-danger">Email is invalid</div>
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" class="form-control" id="password">
+            <input type="password" class="form-control" id="password"  minlength="6" maxlength="50" required [(ngModel)]="model.password"  name="password" #password="ngModel" >
+            <div *ngIf="password.hasError('minlength') && password.touched" class="alert alert-danger">Your password must be at least 6 characters long.</div>
+            <div *ngIf="password.hasError('maxlength') && password.touched" class="alert alert-danger">Your password name cannot exceed 50 characters.</div>
+            <div *ngIf="checkPasswordForSymbols() && password.touched" class="alert alert-danger">Your password must include at least one special character</div>
+            <div *ngIf="checkPasswordForNumbers() && password.touched" class="alert alert-danger">Your password must include at least one number</div>
         </div>
         <div class="form-group">
             <label for="passwordConfirm">Password Confirm</label>
-            <input type="password" class="form-control" id="passwordConfirm">
+            <input type="password" class="form-control" id="passwordConfirm" required [(ngModel)]="model.confirmPassword"  name="passwordConfirm">
         </div>
-        <button type="submit" class="btn btn-success">Submit</button>
+        <div class="form-group error-message text-danger">
+            <div *ngFor="let error of Errors">
+                <span class="text-center">{{error}}</span>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success" [disabled]="!registerForm.valid">Submit</button>
     </form>
 </div>
+

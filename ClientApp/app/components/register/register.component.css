@@ -1,0 +1,15 @@
+﻿.error-message {
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 5px;
+    padding-bottom: 0px;
+    &.text-danger
+
+{
+    color: #f5f5f5;
+    background-color: #ce2a26;
+    border-radius: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+}

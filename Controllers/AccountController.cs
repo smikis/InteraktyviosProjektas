@@ -57,8 +57,9 @@ namespace Digital.Controllers
                 if (result.Succeeded)
                 {                 
                     _logger.LogInformation(1, "Logged in. Generating token");
-                    var user = _userManager.GetUserAsync(HttpContext.User).Result;              
-                    var token = _authenticationService.GetAuthorizationToken(user);
+                    var user = await _userManager.FindByEmailAsync(model.Email);              
+                    var token = await _authenticationService.GetAuthorizationToken(user);
+                    
                     return Ok(token);
                 }
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");

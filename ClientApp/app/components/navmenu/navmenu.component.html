@@ -9,29 +9,53 @@
             </button>
             <a class='navbar-brand' [routerLink]="['/home']">Digital</a>
         </div>
-      
-            <ul class='nav navbar-nav'>
+
+        <ul class='nav navbar-nav'>
+            <li [routerLinkActive]="['link-active']">
+                <a [routerLink]="['/home']">
+                    <span class='glyphicon glyphicon-home'></span> Home
+                </a>
+            </li>
+            <li [routerLinkActive]="['link-active']">
+                <a [routerLink]="['/counter']">
+                    <span class='glyphicon glyphicon-education'></span> Counter
+                </a>
+            </li>
+            <li [routerLinkActive]="['link-active']">
+                <a [routerLink]="['/fetch-data']">
+                    <span class='glyphicon glyphicon-th-list'></span> Fetch data
+                </a>
+            </li>
+            <li [routerLinkActive]="['link-active']">
+                <a [routerLink]="['/hello']">
+                    <span class='glyphicon glyphicon-user'></span> Hello
+                </a>
+            </li>
+
+        </ul>
+        <div *ngIf="!IsLoggedIn()">
+            <ul class="nav navbar-nav navbar-right">
                 <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/home']">
-                        <span class='glyphicon glyphicon-home'></span> Home
+                    <a [routerLink]="['/register']">
+                        <span class="glyphicon glyphicon-user"></span> Register
                     </a>
                 </li>
                 <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/counter']">
-                        <span class='glyphicon glyphicon-education'></span> Counter
-                    </a>
-                </li>
-                <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/fetch-data']">
-                        <span class='glyphicon glyphicon-th-list'></span> Fetch data
-                    </a>
-                </li>
-                <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/hello']">
-                        <span class='glyphicon glyphicon-user'></span> Hello
+                    <a [routerLink]="['/login']">
+                        <span class="glyphicon glyphicon-log-in"></span> Login
                     </a>
                 </li>
             </ul>
         </div>
+        <div *ngIf="IsLoggedIn()" >
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a (click)="onLogoutClick()">
+                        <span class="glyphicon glyphicon-log-in"></span> Log out
+                    </a>
+                </li>            
+            </ul>
+        </div>
     </div>
+</div>
 

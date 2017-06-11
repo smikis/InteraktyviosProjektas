@@ -1,9 +1,10 @@
 ﻿using Digital.Models;
+using System.Threading.Tasks;
 
 namespace Digital.Services
 {
     public interface IAuthenticationService
     {
-        string GetAuthorizationToken(ApplicationUser user);
+        Task<string> GetAuthorizationToken(ApplicationUser user);
     }
 }

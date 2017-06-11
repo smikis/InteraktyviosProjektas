@@ -22,11 +22,11 @@ namespace Digital.Services
             _userManager = userManager;
         }
 
-        public string GetAuthorizationToken(ApplicationUser user)
+        public async Task<string> GetAuthorizationToken(ApplicationUser user)
         {
             var requestAt = DateTime.Now;
             var expiresIn = requestAt + TimeSpan.FromMinutes(60);
-            var token = GenerateToken(user, expiresIn);
+            var token = await GenerateToken(user, expiresIn);
 
             return JsonConvert.SerializeObject(new {
                 requestAt = requestAt,

@@ -26,7 +26,7 @@ export class NewProductComponent {
 
     onSubmit() {
         var testOptions = new INg2UploaderOptions();
-        testOptions.url = "http://localhost:51524/api/Products";
+        testOptions.url = this.originUrl + "/api/Products";
         testOptions.data = {
             name: this.model.name,
             description: this.model.description,

@@ -17,7 +17,7 @@ import { WeatherComponent } from './components/weather/weather.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { NewProductComponent } from './components/newproduct/newproduct.component';
-
+import { ProductDetailsComponent } from './components/details/productdetails.component';
 
 export const sharedConfig: NgModule = {
     bootstrap: [ AppComponent ],
@@ -31,7 +31,8 @@ export const sharedConfig: NgModule = {
         WeatherComponent,
         RegisterComponent,
         LoginComponent,
-        NewProductComponent
+        NewProductComponent,
+        ProductDetailsComponent
     ],
     imports: [
         NguiPopupModule,
@@ -48,6 +49,7 @@ export const sharedConfig: NgModule = {
             { path: 'register', component: RegisterComponent },
             { path: 'login', component: LoginComponent },
             { path: 'newProduct', component: NewProductComponent },
+            { path: 'productDetails/:id', component: ProductDetailsComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ]

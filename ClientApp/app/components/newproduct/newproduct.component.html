@@ -1,0 +1,36 @@
+﻿<div class="container">
+    <h1>New product</h1>
+    <form (ngSubmit)="onSubmit()" #newProductForm="ngForm">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" required minlength="5" maxlength="50" [(ngModel)]="model.name" name="name" #name="ngModel">
+            <div *ngIf="name.hasError('required') && (name.touched || name.dirty)" class="alert alert-danger">You must include name.</div>
+            <div *ngIf="name.hasError('minlength') && name.touched" class="alert alert-danger">Name must be at least 5 characters long.</div>
+            <div *ngIf="name.hasError('maxlength') && name.touched" class="alert alert-danger">Name cannot exceed 50 characters.</div>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" rows="5" id="description"  required   minlength="10" maxlength="500" [(ngModel)]="model.description" name="description" #description="ngModel"></textarea>
+            <div *ngIf="description.hasError('required') && (description.touched || description.dirty)" class="alert alert-danger">You must include description.</div>
+            <div *ngIf="description.hasError('minlength') && description.touched" class="alert alert-danger">Description must be at least 10 characters long.</div>
+            <div *ngIf="description.hasError('maxlength') && description.touched" class="alert alert-danger">Description cannot exceed 500 characters.</div>
+        </div>
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input type="number" class="form-control" id="price" required [min]="1" [max]="9999" [(ngModel)]="model.price" name="price" #price="ngModel">
+            <div *ngIf="price.hasError('required') && (price.touched)" class="alert alert-danger">You must include price.</div>
+            <div *ngIf="price.hasError('min') && price.touched" class="alert alert-danger">Minimum price is 1</div>   
+            <div *ngIf="price.hasError('max') && price.touched" class="alert alert-danger">Maximum price is 9999</div>    
+        </div>   
+        
+        <input type="file" name="file" (change)="onChange($event)">
+
+        <div class="form-group error-message text-danger">
+            <div *ngFor="let error of Errors">
+                <span class="text-center">{{error}}</span>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success" [disabled]="!newProductForm.valid">Submit</button>
+    </form>
+</div>
+

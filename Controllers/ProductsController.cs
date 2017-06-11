@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Digital.Data;
 using Digital.Models;
+using System.IO;
 
 namespace Digital.Controllers
 {
@@ -49,7 +50,7 @@ namespace Digital.Controllers
 
         // PUT: api/Products/5
         [HttpPut("{id}")]
-        public IActionResult PutProduct([FromRoute] int id, [FromBody] Product product)
+        public IActionResult PutProduct([FromRoute] int id,Product product)
         {
             if (!ModelState.IsValid)
             {
@@ -77,13 +78,16 @@ namespace Digital.Controllers
 
         // POST: api/Products
         [HttpPost]
-        public IActionResult PostProduct([FromBody] Product product)
+        public IActionResult PostProduct(Product product, [FromForm] IFormFile file)
         {
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
+            product.CreateDate = DateTime.UtcNow;
+            product.Image = GetImageBytes(file);
             _context.InsertProduct(product);
              _context.Save();
 
@@ -92,7 +96,7 @@ namespace Digital.Controllers
 
         // DELETE: api/Products/5
         [HttpDelete("{id}")]
-        public IActionResult DeleteProduct([FromRoute] int id)
+        public IActionResult DeleteProduct(int id)
         {
             if (!ModelState.IsValid)
             {
@@ -110,6 +114,18 @@ namespace Digital.Controllers
 
             return Ok(product);
         }
+
+        private byte[] GetImageBytes(IFormFile file)
+        {
+            using (var fileStream = file.OpenReadStream())
+            using (var ms = new MemoryStream())
+            {
+                fileStream.CopyTo(ms);
+                var fileBytes = ms.ToArray();
+                return fileBytes;
+            }
+        }
+
 
     }
 }

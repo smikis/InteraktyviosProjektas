@@ -25,7 +25,7 @@
             <div *ngIf="password.hasError('maxlength') && password.touched" class="alert alert-danger">Your password name cannot exceed 50 characters.</div>
             <div *ngIf="checkPasswordForSymbols() && password.touched" class="alert alert-danger">Your password must include at least one special character</div>
             <div *ngIf="checkPasswordForNumbers() && password.touched" class="alert alert-danger">Your password must include at least one number</div>
-        </div>
+        </div>a
         <div class="form-group">
             <label for="passwordConfirm">Password Confirm</label>
             <input type="password" class="form-control" id="passwordConfirm" required [(ngModel)]="model.confirmPassword"  name="passwordConfirm">

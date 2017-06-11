@@ -13,14 +13,17 @@ export class NavMenuComponent {
         
     }
 
-    IsLoggedIn(): boolean {
+    isLoggedIn(): boolean {
         return this.authService.checkLogin();
     }  
 
+    isAdmin(): boolean {
+        return this.authService.checkAdmin();
+    }  
 
     onLogoutClick() {
-        console.log("Logout");
-        console.log(sessionStorage.getItem("token"));
+        this.authService.logout();
+        this.router.navigate(['/login']);
     }
 
 }

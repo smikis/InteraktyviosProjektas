@@ -32,7 +32,8 @@ namespace Digital.Services
                 requestAt = requestAt,
                 expiresIn = expiresIn,
                 tokenType = AuthenticationOptions.TokenType,
-                accessToken = token
+                accessToken = token,
+                isAdmin = await _userManager.IsInRoleAsync(user, "Administrator")
             }
             );
         }

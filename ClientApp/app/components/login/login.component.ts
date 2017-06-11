@@ -29,7 +29,8 @@ export class LoginComponent {
                 var result = response.json() as LoginResult;
                 console.log(result);
                 this.autheService.setToken(result.accessToken);
-                //this.router.navigate(['/']);
+                this.autheService.setAdmin(result.isAdmin);
+                this.router.navigate(['/']);
             }
             ,
             error => {
@@ -45,6 +46,7 @@ interface LoginResult {
     expiresIn: string;
     tokenType: string;
     accessToken: string;
+    isAdmin: string;
 }
 
 class Login {

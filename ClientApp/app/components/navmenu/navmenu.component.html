@@ -16,24 +16,31 @@
                     <span class='glyphicon glyphicon-home'></span> Home
                 </a>
             </li>
-            <li [routerLinkActive]="['link-active']">
-                <a [routerLink]="['/counter']">
-                    <span class='glyphicon glyphicon-education'></span> Counter
-                </a>
-            </li>
-            <li [routerLinkActive]="['link-active']">
-                <a [routerLink]="['/fetch-data']">
-                    <span class='glyphicon glyphicon-th-list'></span> Fetch data
-                </a>
-            </li>
-            <li [routerLinkActive]="['link-active']">
-                <a [routerLink]="['/hello']">
-                    <span class='glyphicon glyphicon-user'></span> Hello
-                </a>
-            </li>
-
         </ul>
-        <div *ngIf="!IsLoggedIn()">
+            <ul class='nav navbar-nav' *ngIf="isAdmin()">
+                <li [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/counter']">
+                        <span class='glyphicon glyphicon-plus'></span> Add new
+                    </a>
+                </li>
+                <li [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/fetch-data']">
+                        <span class='glyphicon glyphicon-th-list'></span> Orders
+                    </a>
+                </li>
+                <li [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/fetch-data']">
+                        <span class='glyphicon glyphicon-th-list'></span> All products
+                    </a>
+                </li>
+                <li [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/hello']">
+                        <span class='glyphicon glyphicon-user'></span> All users
+                    </a>
+                </li>
+
+            </ul>
+        <div *ngIf="!isLoggedIn()">
             <ul class="nav navbar-nav navbar-right">
                 <li [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/register']">
@@ -47,7 +54,7 @@
                 </li>
             </ul>
         </div>
-        <div *ngIf="IsLoggedIn()" >
+        <div *ngIf="isLoggedIn()" >
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a (click)="onLogoutClick()">

@@ -39,6 +39,7 @@ namespace Digital.Controllers
                 if (result.Succeeded)
                 {                 
                     _logger.LogInformation(3, "User created a new account with password.");
+                    await _userManager.AddToRoleAsync(user, "User");
                     return Ok();
                 }
                 GetErrors(result);
@@ -56,8 +57,7 @@ namespace Digital.Controllers
                 if (result.Succeeded)
                 {                 
                     _logger.LogInformation(1, "Logged in. Generating token");
-                    var user = _userManager.GetUserAsync(HttpContext.User).Result;
-                    await _userManager.AddToRoleAsync(user, "User");
+                    var user = _userManager.GetUserAsync(HttpContext.User).Result;              
                     var token = _authenticationService.GetAuthorizationToken(user);
                     return Ok(token);
                 }
@@ -89,18 +89,7 @@ namespace Digital.Controllers
             _rolesService.GenerateRoles();
             return Ok("Roles created");
         }
-
-        [Authorize("Bearer")]
-        [HttpGet("claims")]
-        public object Claims()
-        {
-            return User.Claims.Select(c =>
-            new
-            {
-                Type = c.Type,
-                Value = c.Value
-            });
-        }
+   
 
         private List<string> GetErrors()
         {

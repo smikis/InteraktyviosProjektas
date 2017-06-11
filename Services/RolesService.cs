@@ -43,15 +43,16 @@ namespace Digital.Services
             var user = new ApplicationUser();
             user.UserName = "admin@admin.com";
             user.Email = "admin@admin.com";
-           // string userPWD = "Naujas11!";
+            
+            string userPWD = "Naujas11!";
 
-            //IdentityResult result = await _userManager.CreateAsync(user, userPWD);
+            IdentityResult result = await _userManager.CreateAsync(user, userPWD);
 
-            //if (result.Succeeded)
-            //{
+            if (result.Succeeded)
+            {
             var result1 = _userManager.AddToRoleAsync(user, "Administrator");
                 var result2 = _userManager.AddToRoleAsync(user, "User");
-            //}
+            }
 
         }
     }

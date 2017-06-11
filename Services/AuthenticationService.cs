@@ -16,7 +16,11 @@ namespace Digital.Services
 {
     public class AuthenticationService : IAuthenticationService
     {
-       
+        private readonly UserManager<ApplicationUser> _userManager;
+        public AuthenticationService(UserManager<ApplicationUser> userManager)
+        {
+            _userManager = userManager;
+        }
 
         public string GetAuthorizationToken(ApplicationUser user)
         {
@@ -34,24 +38,19 @@ namespace Digital.Services
         }
 
 
-       
-
-
-        private string GenerateToken(ApplicationUser user, DateTime expires)
+    
+        private async Task<string> GenerateToken(ApplicationUser user, DateTime expires)
         {
             var handler = new JwtSecurityTokenHandler();
             var claims = new List<Claim>();
-            foreach (var item in user.Claims)
+            foreach (var item in await _userManager.GetRolesAsync(user))
             {
-                claims.Add(new Claim(item.ClaimType, item.ClaimValue));
+                claims.Add(new Claim("role", item));
             }
+            claims.Add(new Claim("ID", user.Id.ToString()));
             ClaimsIdentity identity = new ClaimsIdentity(
                 new GenericIdentity(user.Email, "TokenAuth"),
-                 new[] {
-                    new Claim("ID", user.Id.ToString()),
-                    new Claim("role", "User" )
-                }
-            //claims.ToArray()
+                claims.ToArray()
             );
 
             var securityToken = handler.CreateToken(new SecurityTokenDescriptor

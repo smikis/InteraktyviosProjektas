@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Ng2UploaderModule } from 'ng2-uploader';
 import { CustomFormsModule } from 'ng2-validation';
+import { NguiPopupModule } from '@ngui/popup';
 
 import { AuthService } from './_services/auth.service';
 
@@ -33,6 +34,7 @@ export const sharedConfig: NgModule = {
         NewProductComponent
     ],
     imports: [
+        NguiPopupModule,
         FormsModule,
         CustomFormsModule,
         Ng2UploaderModule,

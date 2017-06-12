@@ -25,6 +25,11 @@ namespace Digital.Data
             return context.Products.Find(id);
         }
 
+        public byte[] GetProductImage(int id)
+        {
+            return context.Products.Find(id).Image;
+        }
+
         public void InsertProduct(Product product)
         {
             context.Products.Add(product);

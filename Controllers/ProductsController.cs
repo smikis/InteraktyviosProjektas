@@ -45,12 +45,30 @@ namespace Digital.Controllers
                 return NotFound();
             }
 
-            return Ok(product);
+            return Ok(new
+            {
+                name = product.Name,
+                description = product.Description,
+                price = product.Price
+            }
+            );
+        }
+
+        [HttpGet("[action]/{id}")]
+        public IActionResult GetProductImage([FromRoute] int id)
+        {
+            var image = _context.GetProductImage(id);
+            if(image != null)
+            {
+                return File(image, "image/png");
+            }
+            return BadRequest("Image not found");
+
         }
 
         // PUT: api/Products/5
         [HttpPut("{id}")]
-        public IActionResult PutProduct([FromRoute] int id,Product product)
+        public IActionResult PutProduct([FromRoute] int id, Product product)
         {
             if (!ModelState.IsValid)
             {
@@ -69,8 +87,8 @@ namespace Digital.Controllers
                 _context.Save();
             }
             catch (DbUpdateConcurrencyException)
-            {            
-                    throw;
+            {
+                throw;
             }
 
             return NoContent();
@@ -89,7 +107,7 @@ namespace Digital.Controllers
             product.CreateDate = DateTime.UtcNow;
             product.Image = GetImageBytes(file);
             _context.InsertProduct(product);
-             _context.Save();
+            _context.Save();
 
             return CreatedAtAction("GetProduct", new { id = product.ProductID }, product);
         }
@@ -110,7 +128,7 @@ namespace Digital.Controllers
             }
 
             _context.DeleteProduct(product.ProductID);
-             _context.Save();
+            _context.Save();
 
             return Ok(product);
         }

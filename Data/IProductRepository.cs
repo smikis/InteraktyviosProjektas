@@ -12,5 +12,6 @@ namespace Digital.Data
         void InsertProduct(Product product);
         void Save();
         void UpdateProduct(Product product);
+        byte[] GetProductImage(int id);
     }
 }

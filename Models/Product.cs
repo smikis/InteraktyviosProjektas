@@ -15,6 +15,7 @@ namespace Digital.Models
         public string Description { get; set; }
         [Required]
         public double Price { get; set; }
+        public int Quantity { get; set; }
         public DateTime CreateDate { get; set; }
         public byte[] Image { get; set; }
         public ApplicationUser CreatedBy { get; set; }

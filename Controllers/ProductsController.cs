@@ -49,7 +49,8 @@ namespace Digital.Controllers
             {
                 name = product.Name,
                 description = product.Description,
-                price = product.Price
+                price = product.Price,
+                quantity = product.Quantity
             }
             );
         }

@@ -30,7 +30,8 @@ export class NewProductComponent {
         testOptions.data = {
             name: this.model.name,
             description: this.model.description,
-            price: this.model.price
+            price: this.model.price,
+            quantity: this.model.quantity
         };
         var options = new Ng2UploaderOptions(testOptions);
         this.uploader.setOptions(options);
@@ -61,6 +62,7 @@ class Product {
     name: string;
     description: string;
     price: number;
+    quantity: number;
     createdDate: Date;
 }
 class Category {

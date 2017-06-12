@@ -16,6 +16,13 @@
             <div *ngIf="description.hasError('maxlength') && description.touched" class="alert alert-danger">Description cannot exceed 500 characters.</div>
         </div>
         <div class="form-group">
+            <label for="price">Quantity</label>
+            <input type="number" class="form-control" id="quantity" required [min]="0" [max]="9999" [(ngModel)]="model.quantity" name="quantity" #quantity="ngModel">
+            <div *ngIf="quantity.hasError('required') && (quantity.touched)" class="alert alert-danger">You must include quantity.</div>
+            <div *ngIf="quantity.hasError('min') && quantity.touched" class="alert alert-danger">Minimum quantity is 0</div>
+            <div *ngIf="quantity.hasError('max') && quantity.touched" class="alert alert-danger">Maximum quantity is 9999</div>
+        </div>   
+        <div class="form-group">
             <label for="price">Price</label>
             <input type="number" class="form-control" id="price" required [min]="1" [max]="9999" [(ngModel)]="model.price" name="price" #price="ngModel">
             <div *ngIf="price.hasError('required') && (price.touched)" class="alert alert-danger">You must include price.</div>

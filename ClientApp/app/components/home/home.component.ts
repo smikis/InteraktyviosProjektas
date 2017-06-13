@@ -1,22 +1,22 @@
 import { Component, Inject } from '@angular/core';
+import { Http } from '@angular/http';
 import { Product } from '../../classes/product';
 @Component({
     selector: 'home',
     templateUrl: './home.component.html'
 })
 export class HomeComponent {
-
-    constructor( @Inject('ORIGIN_URL') private originUrl: string) { }
+    products = new Array<Product>();
+    constructor( @Inject('ORIGIN_URL') private originUrl: string, private http: Http) {
+        this.http.get(this.originUrl + '/api/Products/').subscribe(result => {
+            this.products = result.json() as Product[];
+            console.log(this.products[0].productID);
+        });
+    }
     public getProducts(): Product[] {
-        return this.products();
+        return this.products;
     }
 
-    private products(): Product[] {
-        return <Product[]>[
-            <Product>{
-                id: 1, name: 'Blue item', price: 123.09, description: "desc", quantity: 10, imageLink: this.originUrl + "/api/Products/GetProductImage/" +  1 },
-            <Product>{ id: 2, name: 'Green and gray', price: 99.09, description: "descasdasdasd asdvsd asdadsf", quantity: 10, imageLink: this.originUrl + "/api/Products/GetProductImage/" + 1}
-        ];
-    }
+   
 
 }

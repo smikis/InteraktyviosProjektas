@@ -1,4 +1,4 @@
-﻿import { Component, Input } from '@angular/core';
+﻿import { Component, Input, Inject, OnInit} from '@angular/core';
 
 @Component({
     selector: 'product-list-item',
@@ -10,9 +10,14 @@ export class ProductListItemComponent {
     @Input() public name: string;
     @Input() public price: number;
     @Input() public description: string;
-    @Input() public imageLink: string;
-    constructor() {
+    public imageLink: string;
+    public descriptionLink: string;
+    constructor( @Inject('ORIGIN_URL') private originUrl: string) {
        
+    }
+    ngOnInit() {
+        this.imageLink = this.originUrl + '/api/Products/GetProductImage/' + this.id;
+        this.descriptionLink = this.originUrl + '/productDetails/' + this.id;
     }
 
 

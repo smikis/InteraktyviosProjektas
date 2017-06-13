@@ -19,9 +19,8 @@ export class ProductDetailsComponent {
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
             this.id = +params['id'];
-            console.log(this.id);
+            console.log(this.id);         
             this.imageLink = this.originUrl + '/api/Products/GetProductImage/' + this.id;
-
             this.http.get(this.originUrl + '/api/Products/' + this.id).subscribe(result => {
                 this.model = result.json() as Product;
             });

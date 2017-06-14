@@ -17,6 +17,7 @@ import { NewProductComponent } from './components/newproduct/newproduct.componen
 import { ProductDetailsComponent } from './components/details/productdetails.component';
 import { ProductListItemComponent } from './components/productlistitem/ProductListItem.component';
 import { ProductListComponent } from './components/productslist/productlist.component';
+import { UsersListComponent } from './components/userslist/userslist.component';
 
 export const sharedConfig: NgModule = {
     bootstrap: [ AppComponent ],
@@ -29,7 +30,8 @@ export const sharedConfig: NgModule = {
         NewProductComponent,
         ProductDetailsComponent,
         ProductListItemComponent,
-        ProductListComponent
+        ProductListComponent,
+        UsersListComponent
     ],
     imports: [
         NguiPopupModule,
@@ -44,6 +46,7 @@ export const sharedConfig: NgModule = {
             { path: 'login', component: LoginComponent },
             { path: 'newProduct', component: NewProductComponent },
             { path: 'productList', component: ProductListComponent },
+            { path: 'usersList', component: UsersListComponent },
             { path: 'productDetails/:id', component: ProductDetailsComponent },
             { path: '**', redirectTo: 'home' }
         ])

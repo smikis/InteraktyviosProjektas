@@ -18,7 +18,6 @@ namespace Digital.Services
             _userManager = userManager;
         }
 
-
         public async Task GenerateRoles()
         {
             var check = await _roleManager.RoleExistsAsync("User");
@@ -47,11 +46,11 @@ namespace Digital.Services
             string userPWD = "Naujas11!";
 
             IdentityResult result = await _userManager.CreateAsync(user, userPWD);
-
+            var foundUser  = await _userManager.FindByEmailAsync(user.Email);
             if (result.Succeeded)
             {
-            var result1 = _userManager.AddToRoleAsync(user, "Administrator");
-                var result2 = _userManager.AddToRoleAsync(user, "User");
+            var result1 = await _userManager.AddToRoleAsync(foundUser, "Administrator");
+            var result2 = await _userManager.AddToRoleAsync(foundUser, "User");
             }
 
         }

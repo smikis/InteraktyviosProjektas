@@ -20,7 +20,7 @@
             <ul class='nav navbar-nav' *ngIf="isAdmin()">
                 <li [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/newProduct']">
-                        <span class='glyphicon glyphicon-plus'></span> Add new
+                        <span class='glyphicon glyphicon-plus'></span> Add new product
                     </a>
                 </li>
                 <li [routerLinkActive]="['link-active']">
@@ -29,12 +29,12 @@
                     </a>
                 </li>
                 <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/home']">
+                    <a [routerLink]="['/productList']">
                         <span class='glyphicon glyphicon-th-list'></span> All products
                     </a>
                 </li>
                 <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/home']">
+                    <a [routerLink]="['/usersList']">
                         <span class='glyphicon glyphicon-user'></span> All users
                     </a>
                 </li>

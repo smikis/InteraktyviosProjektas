@@ -4,6 +4,7 @@ using Digital.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,6 +66,28 @@ namespace Digital.Controllers
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
             }
             return BadRequest(GetErrors());
+        }
+
+        [HttpGet("[action]")]
+        public IActionResult GetAllUsers()
+        {
+            var result =  _userManager.Users.Include(u => u.Roles).Select(x => new { Email = x.Email, Name = x.Name, LastName = x.LastName, ID = x.Id }).ToList();
+            return Ok(result);
+        }
+
+        [HttpDelete("[action]/{id}")]
+        public async Task<ActionResult> RemoveUser(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+             var result = await _userManager.DeleteAsync(user);
+            if(result.Succeeded)
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         [HttpGet("[action]")]

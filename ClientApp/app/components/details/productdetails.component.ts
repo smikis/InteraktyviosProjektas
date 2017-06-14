@@ -1,7 +1,8 @@
 ﻿import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Http } from '@angular/http';
-
+import { ShoppingCartService } from '../../_services/cart.service';
+import { Product } from '../../classes/product';
 @Component({
     selector: 'productDetails',
     template: require('./productdetails.component.html')
@@ -12,7 +13,7 @@ export class ProductDetailsComponent {
     imageLink: string;
     private sub: any;
     model = new Product();
-    constructor(private route: ActivatedRoute, @Inject('ORIGIN_URL') private originUrl: string, private http: Http) {
+    constructor(private route: ActivatedRoute, @Inject('ORIGIN_URL') private originUrl: string, private http: Http, private cartService: ShoppingCartService) {
 
     }
 
@@ -27,14 +28,10 @@ export class ProductDetailsComponent {
 
         });
 }
-
+    public addToCart(product: Product) {
+        console.log("Adding to cart");
+        console.log(product);
+        this.cartService.addToCart(product);
+    }
    
-}
-
-class Product {
-    name: string;
-    description: string;
-    price: number;
-    createdDate: Date;
-    quantity: number;
 }

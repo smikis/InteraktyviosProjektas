@@ -7,6 +7,7 @@ import { NguiPopupModule } from '@ngui/popup';
 import { DataTableModule } from "angular2-datatable";
 
 import { AuthService } from './_services/auth.service';
+import { ShoppingCartService } from './_services/cart.service';
 
 import { AppComponent } from './components/app/app.component'
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
@@ -18,6 +19,7 @@ import { ProductDetailsComponent } from './components/details/productdetails.com
 import { ProductListItemComponent } from './components/productlistitem/ProductListItem.component';
 import { ProductListComponent } from './components/productslist/productlist.component';
 import { UsersListComponent } from './components/userslist/userslist.component';
+import { ShoppingCartComponent } from './components/shoppingcart/shoppingcart.component';
 
 export const sharedConfig: NgModule = {
     bootstrap: [ AppComponent ],
@@ -31,7 +33,8 @@ export const sharedConfig: NgModule = {
         ProductDetailsComponent,
         ProductListItemComponent,
         ProductListComponent,
-        UsersListComponent
+        UsersListComponent,
+        ShoppingCartComponent
     ],
     imports: [
         NguiPopupModule,
@@ -47,6 +50,7 @@ export const sharedConfig: NgModule = {
             { path: 'newProduct', component: NewProductComponent },
             { path: 'productList', component: ProductListComponent },
             { path: 'usersList', component: UsersListComponent },
+            { path: 'cart', component: ShoppingCartComponent },
             { path: 'productDetails/:id', component: ProductDetailsComponent },
             { path: '**', redirectTo: 'home' }
         ])

@@ -43,6 +43,12 @@
         <div *ngIf="!isLoggedIn()">
             <ul class="nav navbar-nav navbar-right">
                 <li [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/cart']">
+                        <i class="glyphicon glyphicon-shopping-cart">{{(shoppingCartItems$ | async).length}}</i>
+                    </a>
+                </li>
+                
+                <li [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/register']">
                         <span class="glyphicon glyphicon-user"></span> Register
                     </a>

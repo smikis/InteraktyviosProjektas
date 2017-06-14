@@ -13,5 +13,6 @@ namespace Digital.Data
         void Save();
         void UpdateProduct(Product product);
         byte[] GetProductImage(int id);
+        IEnumerable<Product> GetProductsWithouImages();
     }
 }

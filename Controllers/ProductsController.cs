@@ -26,7 +26,7 @@ namespace Digital.Controllers
         [HttpGet]
         public IEnumerable<Product> GetProducts()
         {
-            return _context.GetProducts();
+            return _context.GetProductsWithouImages();
         }
 
         // GET: api/Products/5
@@ -63,7 +63,7 @@ namespace Digital.Controllers
             {
                 return File(image, "image/png");
             }
-            return BadRequest("Image not found");
+            return File(System.IO.File.ReadAllBytes("ClientApp/Images/images.jpg"), "image/png");
 
         }
 

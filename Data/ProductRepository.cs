@@ -17,8 +17,16 @@ namespace Digital.Data
 
         public IEnumerable<Product> GetProducts()
         {
-            return context.Products.ToList();
+            return context.Products;
         }
+
+        public IEnumerable<Product> GetProductsWithouImages()
+        {
+            var products = context.Products.ToList();
+            products.ForEach(x => x.Image = null);
+            return products;
+        }
+
 
         public Product GetProductByID(int id)
         {
@@ -27,7 +35,7 @@ namespace Digital.Data
 
         public byte[] GetProductImage(int id)
         {
-            return context.Products.Find(id).Image;
+            return context.Products.Find(id)?.Image;
         }
 
         public void InsertProduct(Product product)

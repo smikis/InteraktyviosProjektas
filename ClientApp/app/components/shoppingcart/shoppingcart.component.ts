@@ -1,21 +1,23 @@
-﻿import { Component, OnInit, Inject } from '@angular/core';
+﻿import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { ShoppingCartService } from '../../_services/cart.service';
 import { Product } from '../../classes/product';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs/observable/of';
 import { Router } from '@angular/router';
 import { Http, Headers } from '@angular/http';
+import { NguiPopupComponent, NguiMessagePopupComponent } from "@ngui/popup/dist";
 @Component({
     selector: 'shoppingCart',
     templateUrl: './shoppingcart.component.html'
 })
 export class ShoppingCartComponent implements OnInit {
+    @ViewChild(NguiPopupComponent) popup: NguiPopupComponent;
 
     public shoppingCartItems$: Observable<Product[]>;
     public shoppingCartItems: Product[] = [];
     private totalAmount: number;
 
-    constructor(private http: Http, @Inject('ORIGIN_URL') private originUrl: string,private cartService: ShoppingCartService, private router: Router) {
+    constructor(private http: Http, @Inject('ORIGIN_URL') private originUrl: string, private cartService: ShoppingCartService, private router: Router) {
         this.shoppingCartItems$ = this
             .cartService
             .getItems();
@@ -56,14 +58,23 @@ export class ShoppingCartComponent implements OnInit {
             .subscribe(
             response => {
                 console.log(response);
-            }
-            ,
+                this.popup.open(NguiMessagePopupComponent, {
+                    title: 'Success',
+                    message: 'Thank you for you purchase',
+                    buttons: {
+                        OK: () => {
+                            this.cartService.clear();
+                            this.router.navigate(['/']);
+                        }
+                    }
+                });
+            },
             error => {
                 console.log(error);
             }
             )
     }
-        
+
 
     ngOnInit() {
     }

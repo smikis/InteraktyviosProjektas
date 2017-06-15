@@ -32,6 +32,12 @@ export class ShoppingCartService {
         return this.productsInCartSubject;
     }
 
+    public clear() {
+        console.log("clearing cart");
+        this.productsInCart = [];
+        this.productsInCartSubject.next([...this.productsInCart]);
+    }
+
     public getTotalAmount(): number {
         var currentItems = [...this.productsInCart];
         var count = 0;

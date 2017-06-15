@@ -22,6 +22,7 @@ namespace Digital.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         public SalesController(ISalesRepository context, UserManager<ApplicationUser> userManager, IProductRepository productRepo)
         {
+            _products = productRepo;
             _userManager = userManager;
             _context = context;
         }
@@ -29,9 +30,9 @@ namespace Digital.Controllers
         // GET: api/Products
         [HttpGet]
         [Authorize("Bearer", Roles = "Administrator")]
-        public IEnumerable<Sale> GetSales()
+        public IActionResult GetSales()
         {
-            return _context.GetSales();
+            return Ok(_context.GetSales().Select(sale => new { Id = sale.SaleID, Amount = sale.TotalAmount, Quantity = sale.TotalQuantity, Buyer = sale.Buyer.Email, Date = sale.CreatedDate }));
         }
 
         // GET: api/Products/5
@@ -100,8 +101,10 @@ namespace Digital.Controllers
             foreach(var line in lines)
             {
                 var saleLine = new SaleLine();
-                saleLine.Product = _products.GetProductByID(int.Parse(line.Key));
+                var id = int.Parse(line.Key);
+                saleLine.Product = _products.GetProductByID(id);
                 saleLine.Quantity = line.Value.Count;
+                saleLine.LineTotal = line.Value.Sum(x => x.price);
                 saleLines.Add(saleLine);
             }
 
@@ -109,7 +112,7 @@ namespace Digital.Controllers
             sale.CreatedDate = DateTime.UtcNow;
             sale.TotalAmount = products.Sum(x => x.price).ToString();
             sale.TotalQuantity = products.Count.ToString();
-                  
+            sale.PurchaseList = saleLines;     
             _context.InsertSale(sale);
             _context.Save();
 

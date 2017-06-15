@@ -17,7 +17,7 @@ namespace Digital.Data
 
         public IEnumerable<Sale> GetSales()
         {
-            return context.Sales;
+            return context.Sales.Include("Buyer");
         }
 
         public Sale GetSaleByID(int id)

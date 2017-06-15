@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using Digital.Data;
 using Digital.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace Digital.Controllers
 {
@@ -15,14 +18,17 @@ namespace Digital.Controllers
     public class SalesController : Controller
     {
         private readonly ISalesRepository _context;
-
-        public SalesController(ISalesRepository context)
+        private readonly IProductRepository _products;
+        private readonly UserManager<ApplicationUser> _userManager;
+        public SalesController(ISalesRepository context, UserManager<ApplicationUser> userManager, IProductRepository productRepo)
         {
+            _userManager = userManager;
             _context = context;
         }
 
         // GET: api/Products
         [HttpGet]
+        [Authorize("Bearer", Roles = "Administrator")]
         public IEnumerable<Sale> GetSales()
         {
             return _context.GetSales();
@@ -30,6 +36,7 @@ namespace Digital.Controllers
 
         // GET: api/Products/5
         [HttpGet("{id}")]
+        [Authorize("Bearer", Roles = "Administrator")]
         public IActionResult Getsale([FromRoute] int id)
         {
             if (!ModelState.IsValid)
@@ -50,6 +57,7 @@ namespace Digital.Controllers
 
         // PUT: api/Products/5
         [HttpPut("{id}")]
+        [Authorize("Bearer", Roles = "Administrator")]
         public IActionResult PutSale([FromRoute] int id, Sale sale)
         {
             if (!ModelState.IsValid)
@@ -78,21 +86,35 @@ namespace Digital.Controllers
 
         // POST: api/Products
         [HttpPost("[action]")]
-        public IActionResult PostSales(List<SaleProduct> products)
+        [Authorize("Bearer", Roles = "User")]
+        public async Task<IActionResult> PostSales([FromBody] List<SaleProduct> products)
         {
-            /*
-            if (!ModelState.IsValid)
+            var userId = HttpContext.User.FindFirst("ID").Value;
+            var userIdd = User.FindAll(ClaimTypes.NameIdentifier);
+            var actualUser = await _userManager.FindByIdAsync(userId);            
+            var sale = new Sale();
+
+            var lines = products.GroupBy(x => x.productID).ToDictionary(y=> y.Key, y=> y.ToList());
+
+            List<SaleLine> saleLines = new List<SaleLine>();
+            foreach(var line in lines)
             {
-                return BadRequest(ModelState);
+                var saleLine = new SaleLine();
+                saleLine.Product = _products.GetProductByID(int.Parse(line.Key));
+                saleLine.Quantity = line.Value.Count;
+                saleLines.Add(saleLine);
             }
 
-            sale.CreatedDate = DateTime.UtcNow;          
+            sale.Buyer = actualUser;
+            sale.CreatedDate = DateTime.UtcNow;
+            sale.TotalAmount = products.Sum(x => x.price).ToString();
+            sale.TotalQuantity = products.Count.ToString();
+                  
             _context.InsertSale(sale);
             _context.Save();
 
             return CreatedAtAction("GetProduct", new { id = sale.SaleID }, sale);
-            */
-            return Ok();
+            
         }
 
         // DELETE: api/Products/5

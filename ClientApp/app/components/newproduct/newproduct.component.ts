@@ -33,6 +33,8 @@ export class NewProductComponent {
             price: this.model.price,
             quantity: this.model.quantity
         };
+        testOptions.authToken = sessionStorage.getItem("token");
+        testOptions.authTokenPrefix = "Bearer";
         var options = new Ng2UploaderOptions(testOptions);
         this.uploader.setOptions(options);
         this.uploader.uploadFile(this.file);

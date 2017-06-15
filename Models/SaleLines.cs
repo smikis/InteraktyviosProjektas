@@ -10,5 +10,6 @@ namespace Digital.Models
         public string SaleLineID { get; set; }
         public Product Product { get; set; }
         public int Quantity { get; set; }
+        public double LineTotal { get; set; }
     }
 }

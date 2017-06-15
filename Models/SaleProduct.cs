@@ -9,7 +9,7 @@ namespace Digital.Models
     {
         public string productID { get; set; }
         public string name { get; set; }
-        public string price { get; set; }
+        public double price { get; set; }
 
     }
 }

@@ -1,6 +1,6 @@
 ﻿import { Component, Input, Inject, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { Http } from "@angular/http";
+import { Http, Headers } from "@angular/http";
 import { NguiPopupComponent, NguiMessagePopupComponent } from "@ngui/popup/dist";
 @Component({
     selector: 'users-list',
@@ -18,7 +18,9 @@ export class UsersListComponent {
     }
 
     ngOnInit(): void {
-        this.http.get(this.originUrl + '/api/Account/GetAllUsers').subscribe(result => {
+        let headers = new Headers();
+        headers.append("Authorization", "Bearer " + sessionStorage.getItem("token"));
+        this.http.get(this.originUrl + '/api/Account/GetAllUsers', { headers: headers }).subscribe(result => {
             console.log(result);
             this.data = result.json();
         });
@@ -38,7 +40,9 @@ export class UsersListComponent {
                     var index = this.data.indexOf(item);
                     this.data.splice(index, 1);
 
-                    this.http.delete(this.originUrl + '/api/Account/RemoveUser/' + item.id).subscribe(result => {
+                    let headers = new Headers();
+                    headers.append("Authorization", "Bearer " + sessionStorage.getItem("token"));
+                    this.http.delete(this.originUrl + '/api/Account/RemoveUser/' + item.id, { headers: headers }).subscribe(result => {
                         console.log(result);
                     });
 

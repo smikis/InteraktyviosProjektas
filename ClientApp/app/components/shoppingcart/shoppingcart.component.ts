@@ -4,7 +4,7 @@ import { Product } from '../../classes/product';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs/observable/of';
 import { Router } from '@angular/router';
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 @Component({
     selector: 'shoppingCart',
     templateUrl: './shoppingcart.component.html'
@@ -50,7 +50,9 @@ export class ShoppingCartComponent implements OnInit {
     checkout() {
         console.log("checkout");
         console.log(this.shoppingCartItems);
-        this.http.post(this.originUrl + '/api/Sales/PostSales', this.shoppingCartItems)
+        let headers = new Headers();
+        headers.append("Authorization", "Bearer " + sessionStorage.getItem("token"));
+        this.http.post(this.originUrl + '/api/Sales/PostSales', this.shoppingCartItems, { headers: headers })
             .subscribe(
             response => {
                 console.log(response);

@@ -1,6 +1,6 @@
 ﻿import { Component, Input, Inject, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { Http } from "@angular/http";
+import { Http, Headers } from "@angular/http";
 import { NguiPopupComponent, NguiMessagePopupComponent } from "@ngui/popup/dist";
 @Component({
     selector: 'product-list',
@@ -36,8 +36,9 @@ export class ProductListComponent {
                     console.log("deleted");
                     var index = this.data.indexOf(item);
                     this.data.splice(index, 1);
-
-                    this.http.delete(this.originUrl + '/api/Products/' + item.productID).subscribe(result => {
+                    let headers = new Headers();
+                    headers.append("Authorization", "Bearer " + sessionStorage.getItem("token"));
+                    this.http.delete(this.originUrl + '/api/Products/' + item.productID, { headers: headers }).subscribe(result => {
                         console.log(result);
                     });
 

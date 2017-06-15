@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Digital.Data;
 using Digital.Models;
 using System.IO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Digital.Controllers
 {
@@ -69,6 +70,7 @@ namespace Digital.Controllers
 
         // PUT: api/Products/5
         [HttpPut("{id}")]
+        [Authorize("Bearer", Roles = "Administrator")]
         public IActionResult PutProduct([FromRoute] int id, Product product)
         {
             if (!ModelState.IsValid)
@@ -97,6 +99,7 @@ namespace Digital.Controllers
 
         // POST: api/Products
         [HttpPost]
+        [Authorize("Bearer", Roles = "Administrator")]
         public IActionResult PostProduct(Product product, [FromForm] IFormFile file)
         {
 
@@ -115,6 +118,7 @@ namespace Digital.Controllers
 
         // DELETE: api/Products/5
         [HttpDelete("{id}")]
+        [Authorize("Bearer", Roles = "Administrator")]
         public IActionResult DeleteProduct(int id)
         {
             if (!ModelState.IsValid)

@@ -69,6 +69,7 @@ namespace Digital.Controllers
         }
 
         [HttpGet("[action]")]
+        [Authorize("Bearer", Roles = "Administrator")]
         public IActionResult GetAllUsers()
         {
             var result =  _userManager.Users.Include(u => u.Roles).Select(x => new { Email = x.Email, Name = x.Name, LastName = x.LastName, ID = x.Id }).ToList();
@@ -76,6 +77,7 @@ namespace Digital.Controllers
         }
 
         [HttpDelete("[action]/{id}")]
+        [Authorize("Bearer", Roles = "Administrator")]
         public async Task<ActionResult> RemoveUser(string id)
         {
             var user = await _userManager.FindByIdAsync(id);

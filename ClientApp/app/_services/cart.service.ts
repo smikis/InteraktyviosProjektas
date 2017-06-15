@@ -18,6 +18,16 @@ export class ShoppingCartService {
         console.log(this.productsInCartSubject);
     }
 
+    public getItemCount(item: Product) {
+        var currentItems = [...this.productsInCart];
+        var count = 0;
+        for (var i = 0; i < currentItems.length; ++i) {
+            if (currentItems[i] == item)
+                count++;
+        }
+        return count;
+    }
+
     public getItems(): Observable<Product[]> {
         return this.productsInCartSubject;
     }

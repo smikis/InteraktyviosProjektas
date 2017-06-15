@@ -9,7 +9,7 @@ import { Product } from '../../classes/product';
 })
 export class ProductDetailsComponent {
     id: number;
-    quantity: number;
+    quantity = 1;
     imageLink: string;
     private sub: any;
     model = new Product();
@@ -29,9 +29,11 @@ export class ProductDetailsComponent {
         });
 }
     public addToCart(product: Product) {
-        console.log("Adding to cart");
-        console.log(product);
-        this.cartService.addToCart(product);
+        product.imageLink = this.imageLink;
+        for (var i = 0; i < this.quantity; i++) {
+            this.cartService.addToCart(product);
+        }
+        
     }
    
 }

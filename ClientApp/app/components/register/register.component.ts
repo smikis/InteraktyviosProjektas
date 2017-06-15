@@ -41,7 +41,7 @@ export class RegisterComponent {
         this.http.post(this.originUrl + '/api/Account/Register', data)
             .subscribe(
             response => {
-                this.router.navigate(['/']);
+                this.router.navigate(['/login']);
             }
             ,
             error => {

@@ -114,6 +114,46 @@ namespace Digital.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("Digital.Models.Sale", b =>
+                {
+                    b.Property<int>("SaleID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("BuyerId");
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("TotalAmount");
+
+                    b.Property<string>("TotalQuantity");
+
+                    b.HasKey("SaleID");
+
+                    b.HasIndex("BuyerId");
+
+                    b.ToTable("Sales");
+                });
+
+            modelBuilder.Entity("Digital.Models.SaleLine", b =>
+                {
+                    b.Property<string>("SaleLineID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("ProductID");
+
+                    b.Property<int>("Quantity");
+
+                    b.Property<int?>("SaleID");
+
+                    b.HasKey("SaleLineID");
+
+                    b.HasIndex("ProductID");
+
+                    b.HasIndex("SaleID");
+
+                    b.ToTable("SaleLine");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -230,6 +270,24 @@ namespace Digital.Migrations
                     b.HasOne("Digital.Models.ApplicationUser", "CreatedBy")
                         .WithMany()
                         .HasForeignKey("CreatedById");
+                });
+
+            modelBuilder.Entity("Digital.Models.Sale", b =>
+                {
+                    b.HasOne("Digital.Models.ApplicationUser", "Buyer")
+                        .WithMany()
+                        .HasForeignKey("BuyerId");
+                });
+
+            modelBuilder.Entity("Digital.Models.SaleLine", b =>
+                {
+                    b.HasOne("Digital.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductID");
+
+                    b.HasOne("Digital.Models.Sale")
+                        .WithMany("PurchaseList")
+                        .HasForeignKey("SaleID");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>

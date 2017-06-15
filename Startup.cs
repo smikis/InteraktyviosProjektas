@@ -45,6 +45,7 @@ namespace Digital
                 .AddDefaultTokenProviders();
 
             services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddTransient<ISalesRepository, SalesRepository>();
             services.AddTransient<IAuthenticationService, AuthenticationService>();
             services.AddTransient<IRolesService, RolesService>();
             services.AddAuthorization(auth =>

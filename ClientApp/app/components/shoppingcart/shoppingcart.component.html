@@ -25,8 +25,8 @@
                         <td class="col-sm-1 col-md-1" style="text-align: center">
                             <input type="number" class="form-control"  disabled value="{{getItemCount(item)}}">
                         </td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>{{item.price}}</strong></td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>{{item.price * getItemCount(item)}}</strong></td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong>{{item.price}}€</strong></td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong>{{item.price * getItemCount(item)}}€</strong></td>
                         <td class="col-sm-1 col-md-1">
                             <button type="button" class="btn btn-danger">
                                 <span class="glyphicon glyphicon-remove"></span> Remove
@@ -39,20 +39,20 @@
                         <td>   </td>
                         <td>   </td>
                         <td><h3>Total</h3></td>
-                        <td class="text-right"><h3><strong>$31.53</strong></h3></td>
+                        <td class="text-right"><h3><strong>{{getTotalAmount()}}€</strong></h3></td>
                     </tr>
                     <tr>
                         <td>   </td>
                         <td>   </td>
                         <td>   </td>
                         <td>
-                            <button type="button" class="btn btn-default">
-                                <span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping
+                            <button type="button" class="btn btn-default" (click)="routeToHome()">
+                                <span class="glyphicon glyphicon-shopping-cart" ></span> Continue Shopping
                             </button>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-success">
-                                Checkout <span class="glyphicon glyphicon-play"></span>
+                            <button type="button" class="btn btn-success" (click)="checkout()">
+                                Checkout <span class="glyphicon glyphicon-play" ></span>
                             </button>
                         </td>
                     </tr>

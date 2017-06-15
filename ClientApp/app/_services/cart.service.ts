@@ -15,7 +15,7 @@ export class ShoppingCartService {
     public addToCart(item: Product) {
         console.log("Adding to cart service");
         this.productsInCartSubject.next([...this.productsInCart, item]);
-        console.log(this.productsInCartSubject);
+       // console.log(this.productsInCartSubject);
     }
 
     public getItemCount(item: Product) {
@@ -30,6 +30,15 @@ export class ShoppingCartService {
 
     public getItems(): Observable<Product[]> {
         return this.productsInCartSubject;
+    }
+
+    public getTotalAmount(): number {
+        var currentItems = [...this.productsInCart];
+        var count = 0;
+        for (var i = 0; i < currentItems.length; ++i) {
+            count += currentItems[i].price;
+        }
+        return count;
     }
 
 

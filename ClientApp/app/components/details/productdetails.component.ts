@@ -30,6 +30,7 @@ export class ProductDetailsComponent {
 }
     public addToCart(product: Product) {
         product.imageLink = this.imageLink;
+        product.productID = this.id;
         for (var i = 0; i < this.quantity; i++) {
             this.cartService.addToCart(product);
         }

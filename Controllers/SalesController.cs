@@ -82,7 +82,7 @@ namespace Digital.Controllers
                 throw;
             }
 
-            return NoContent();
+            return Ok();
         }
 
         // POST: api/Products

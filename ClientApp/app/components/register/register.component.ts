@@ -38,7 +38,7 @@ export class RegisterComponent {
         data.append('email', this.model.email);
         data.append('password', this.model.password);
         data.append('confirmPassword', this.model.confirmPassword);
-        this.http.post(this.originUrl + '/api/Account/Register', data)
+        this.http.post(this.originUrl + '/api/Account', data)
             .subscribe(
             response => {
                 this.router.navigate(['/login']);

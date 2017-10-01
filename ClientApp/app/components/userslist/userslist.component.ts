@@ -20,7 +20,7 @@ export class UsersListComponent {
     ngOnInit(): void {
         let headers = new Headers();
         headers.append("Authorization", "Bearer " + sessionStorage.getItem("token"));
-        this.http.get(this.originUrl + '/api/Account/GetAllUsers', { headers: headers }).subscribe(result => {
+        this.http.get(this.originUrl + '/api/Account', { headers: headers }).subscribe(result => {
             console.log(result);
             this.data = result.json();
         });
@@ -42,7 +42,7 @@ export class UsersListComponent {
 
                     let headers = new Headers();
                     headers.append("Authorization", "Bearer " + sessionStorage.getItem("token"));
-                    this.http.delete(this.originUrl + '/api/Account/RemoveUser/' + item.id, { headers: headers }).subscribe(result => {
+                    this.http.delete(this.originUrl + '/api/Account' + item.id, { headers: headers }).subscribe(result => {
                         console.log(result);
                     });
 

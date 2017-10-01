@@ -23,7 +23,7 @@ export class LoginComponent {
         let data = new URLSearchParams();     
         data.append('email', this.model.email);
         data.append('password', this.model.password);
-        this.http.post(this.originUrl + '/api/Account/Login', data)
+        this.http.post(this.originUrl + '/api/login', data)
             .subscribe(
             response => {
                 var result = response.json() as LoginResult;

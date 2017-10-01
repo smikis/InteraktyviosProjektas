@@ -29,7 +29,7 @@ namespace Digital.Controllers
             _rolesService = rolesService;
         }
 
-        [HttpPost("[action]")]
+        [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Register(Register model)
         {          
@@ -48,27 +48,7 @@ namespace Digital.Controllers
             return BadRequest(GetErrors());
         }
 
-        [HttpPost("[action]")]
-        [AllowAnonymous]
-        public async Task<IActionResult> Login(Login model)
-        {
-            if (ModelState.IsValid)
-            {
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, true, lockoutOnFailure: false);
-                if (result.Succeeded)
-                {                 
-                    _logger.LogInformation(1, "Logged in. Generating token");
-                    var user = await _userManager.FindByEmailAsync(model.Email);              
-                    var token = await _authenticationService.GetAuthorizationToken(user);
-                    
-                    return Ok(token);
-                }
-                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-            }
-            return BadRequest(GetErrors());
-        }
-
-        [HttpGet("[action]")]
+        [HttpGet]
         [Authorize("Bearer", Roles = "Administrator")]
         public IActionResult GetAllUsers()
         {
@@ -76,7 +56,22 @@ namespace Digital.Controllers
             return Ok(result);
         }
 
-        [HttpDelete("[action]/{id}")]
+        [HttpGet("{id}"]
+        [Authorize("Bearer", Roles = "Administrator")]
+        public IActionResult GetUser()
+        {
+            var result = _userManager.Users.Include(u => u.Roles).Select(x => new { Email = x.Email, Name = x.Name, LastName = x.LastName, ID = x.Id }).ToList().First();
+            return Ok(result);
+        }
+
+        [HttpPut("{id}"]
+        [Authorize("Bearer", Roles = "Administrator")]
+        public IActionResult UpdateUser()
+        {
+            return Ok();
+        }
+
+        [HttpDelete("{id}")]
         [Authorize("Bearer", Roles = "Administrator")]
         public async Task<ActionResult> RemoveUser(string id)
         {

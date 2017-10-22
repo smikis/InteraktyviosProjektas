@@ -1,0 +1,11 @@
+C:\Users\Tom\Documents\Visual Studio 2017\valiunas-tomas\Digital.API\bin\Debug\netcoreapp2.0\Digital.API.deps.json
+C:\Users\Tom\Documents\Visual Studio 2017\valiunas-tomas\Digital.API\bin\Debug\netcoreapp2.0\Digital.API.runtimeconfig.json
+C:\Users\Tom\Documents\Visual Studio 2017\valiunas-tomas\Digital.API\bin\Debug\netcoreapp2.0\Digital.API.runtimeconfig.dev.json
+C:\Users\Tom\Documents\Visual Studio 2017\valiunas-tomas\Digital.API\bin\Debug\netcoreapp2.0\Digital.API.dll
+C:\Users\Tom\Documents\Visual Studio 2017\valiunas-tomas\Digital.API\bin\Debug\netcoreapp2.0\Digital.API.pdb
+C:\Users\Tom\Documents\Visual Studio 2017\valiunas-tomas\Digital.API\obj\Debug\netcoreapp2.0\Digital.API.csprojResolveAssemblyReference.cache
+C:\Users\Tom\Documents\Visual Studio 2017\valiunas-tomas\Digital.API\obj\Debug\netcoreapp2.0\Digital.API.csproj.CoreCompileInputs.cache
+C:\Users\Tom\Documents\Visual Studio 2017\valiunas-tomas\Digital.API\obj\Debug\netcoreapp2.0\Digital.API.AssemblyInfoInputs.cache
+C:\Users\Tom\Documents\Visual Studio 2017\valiunas-tomas\Digital.API\obj\Debug\netcoreapp2.0\Digital.API.AssemblyInfo.cs
+C:\Users\Tom\Documents\Visual Studio 2017\valiunas-tomas\Digital.API\obj\Debug\netcoreapp2.0\Digital.API.dll
+C:\Users\Tom\Documents\Visual Studio 2017\valiunas-tomas\Digital.API\obj\Debug\netcoreapp2.0\Digital.API.pdb

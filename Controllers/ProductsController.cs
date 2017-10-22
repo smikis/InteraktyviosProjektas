@@ -100,7 +100,7 @@ namespace Digital.Controllers
         // POST: api/Products
         [HttpPost]
         [Authorize("Bearer", Roles = "Administrator")]
-        public IActionResult PostProduct(Product product, [FromForm] IFormFile file)
+        public IActionResult PostProduct([FromBody]Product product, [FromForm] IFormFile file)
         {
 
             if (!ModelState.IsValid)

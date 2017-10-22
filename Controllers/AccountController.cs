@@ -56,7 +56,7 @@ namespace Digital.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{id}"]
+        [HttpGet("{id}")]
         [Authorize("Bearer", Roles = "Administrator")]
         public IActionResult GetUser()
         {
@@ -64,7 +64,7 @@ namespace Digital.Controllers
             return Ok(result);
         }
 
-        [HttpPut("{id}"]
+        [HttpPut("{id}")]
         [Authorize("Bearer", Roles = "Administrator")]
         public IActionResult UpdateUser()
         {

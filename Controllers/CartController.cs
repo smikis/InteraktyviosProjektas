@@ -35,16 +35,16 @@ namespace Digital.Controllers
         
         // PUT: api/Cart/5
         [HttpPut("{id}")]
-        public ActionResult Put(string id, [FromBody]Cart value)
+        public StatusCodeResult Put(string id, [FromBody]Cart value)
         {
-            return Ok();
+            return new StatusCodeResult(StatusCodes.Status204NoContent);
         }
         
         // DELETE: api/Cart/5
         [HttpDelete("{id}")]
-        public ActionResult Delete(string id)
+        public StatusCodeResult Delete(string id)
         {
-            return Ok();
+            return new StatusCodeResult(StatusCodes.Status204NoContent);
         }
     }
 }

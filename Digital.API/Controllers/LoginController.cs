@@ -16,9 +16,9 @@ namespace Digital.API.Controllers
 
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly IAuthenticationService _authenticationService;
+        private readonly ITokenService _authenticationService;
         private readonly ILogger _logger;
-        public LoginController(UserManager<ApplicationUser> userManager, ILoggerFactory loggerFactory, SignInManager<ApplicationUser> signInManager, IAuthenticationService authenticationService)
+        public LoginController(UserManager<ApplicationUser> userManager, ILoggerFactory loggerFactory, SignInManager<ApplicationUser> signInManager, ITokenService authenticationService)
         {
             _userManager = userManager;
             _logger = loggerFactory.CreateLogger<AccountController>();

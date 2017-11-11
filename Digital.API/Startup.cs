@@ -42,7 +42,7 @@ namespace Digital.API
 
             services.AddTransient<IProductRepository, ProductRepository>();
             services.AddTransient<ISalesRepository, SalesRepository>();
-            services.AddTransient<IAuthenticationService, AuthenticationService>();
+            services.AddTransient<ITokenService, TokenService>();
             services.AddTransient<IRolesService, RolesService>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

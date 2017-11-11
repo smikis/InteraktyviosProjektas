@@ -15,10 +15,10 @@ namespace Digital.API.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly IAuthenticationService _authenticationService;
+        private readonly ITokenService _authenticationService;
         private readonly IRolesService _rolesService;
         private readonly ILogger _logger;
-        public AccountController(UserManager<ApplicationUser> userManager, ILoggerFactory loggerFactory, SignInManager<ApplicationUser> signInManager, IAuthenticationService authenticationService, IRolesService rolesService)
+        public AccountController(UserManager<ApplicationUser> userManager, ILoggerFactory loggerFactory, SignInManager<ApplicationUser> signInManager, ITokenService authenticationService, IRolesService rolesService)
         {
             _userManager = userManager;
             _logger = loggerFactory.CreateLogger<AccountController>();

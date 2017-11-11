@@ -12,10 +12,10 @@ using System.Threading.Tasks;
 
 namespace Digital.API.Services
 {
-    public class AuthenticationService : IAuthenticationService
+    public class TokenService : ITokenService
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        public AuthenticationService(UserManager<ApplicationUser> userManager)
+        public TokenService(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
         }

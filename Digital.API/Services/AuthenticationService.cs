@@ -1,5 +1,5 @@
 ﻿using Digital.API.Helpers;
-using Digital.API.Models;
+using Digital.Contracts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;

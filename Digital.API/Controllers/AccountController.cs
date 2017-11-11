@@ -1,9 +1,8 @@
-﻿using Digital.API.Models;
-using Digital.API.Services;
+﻿using Digital.API.Services;
+using Digital.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;

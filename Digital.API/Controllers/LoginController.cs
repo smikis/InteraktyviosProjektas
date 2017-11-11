@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
-using Digital.API.Models;
 using Digital.API.Services;
+using Digital.Contracts;
 
 namespace Digital.API.Controllers
 {

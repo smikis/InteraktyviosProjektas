@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.IO;
 using Microsoft.AspNetCore.Authorization;
-using Digital.API.Data;
-using Digital.API.Models;
+using Digital.Contracts;
+using Digital.Database.Repositories;
 
 namespace Digital.API.Controllers
 {

@@ -1,4 +1,4 @@
-﻿using Digital.API.Models;
+﻿using Digital.Contracts;
 using System.Threading.Tasks;
 
 namespace Digital.API.Services

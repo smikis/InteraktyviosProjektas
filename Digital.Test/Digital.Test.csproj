@@ -23,7 +23,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Digital.API\Digital.API.csproj" />
-    <ProjectReference Include="..\Digital\Digital.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,10 +1,10 @@
-﻿using Digital.API.Models;
+﻿using Digital.Contracts;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Digital.API.Data
+namespace Digital.Database.Repositories
 {
     public class ProductRepository : IDisposable, IProductRepository
     {

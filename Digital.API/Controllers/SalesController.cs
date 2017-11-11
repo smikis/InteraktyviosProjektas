@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
-using Digital.API.Data;
-using Digital.API.Models;
+using Digital.Database.Repositories;
+using Digital.Contracts;
 
 namespace Digital.API.Controllers
 {

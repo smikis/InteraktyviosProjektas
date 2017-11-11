@@ -9,6 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Digital.API", "..\Digital.A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Digital.Test", "..\Digital.Test\Digital.Test.csproj", "{749BB171-8E97-4ADE-91D0-87C5C44CC5F7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Digital.Database", "..\Digital.Database\Digital.Database.csproj", "{9E37F3D9-465D-45A1-A250-DCA6D8BB4408}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Digital.Contracts", "Digital.Contracts\Digital.Contracts.csproj", "{EC691257-801A-4E6B-B021-04D080675E3C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{749BB171-8E97-4ADE-91D0-87C5C44CC5F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{749BB171-8E97-4ADE-91D0-87C5C44CC5F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{749BB171-8E97-4ADE-91D0-87C5C44CC5F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E37F3D9-465D-45A1-A250-DCA6D8BB4408}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E37F3D9-465D-45A1-A250-DCA6D8BB4408}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E37F3D9-465D-45A1-A250-DCA6D8BB4408}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E37F3D9-465D-45A1-A250-DCA6D8BB4408}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC691257-801A-4E6B-B021-04D080675E3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC691257-801A-4E6B-B021-04D080675E3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC691257-801A-4E6B-B021-04D080675E3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC691257-801A-4E6B-B021-04D080675E3C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

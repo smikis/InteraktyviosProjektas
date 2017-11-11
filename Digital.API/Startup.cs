@@ -1,20 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Digital.API.Data;
 using Microsoft.EntityFrameworkCore;
-using Digital.API.Models;
 using Microsoft.AspNetCore.Identity;
 using Digital.API.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
+using Digital.Database;
+using Digital.Database.Repositories;
+using Digital.Contracts;
 
 namespace Digital.API
 {

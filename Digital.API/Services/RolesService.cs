@@ -1,4 +1,4 @@
-﻿using Digital.API.Models;
+﻿using Digital.Contracts;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 

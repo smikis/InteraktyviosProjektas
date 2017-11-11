@@ -1,8 +1,8 @@
-﻿using Digital.API.Models;
+﻿using Digital.Contracts;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Digital.API.Data
+namespace Digital.Database
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

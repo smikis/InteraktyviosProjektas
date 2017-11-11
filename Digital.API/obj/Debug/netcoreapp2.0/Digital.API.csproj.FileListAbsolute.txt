@@ -20,3 +20,7 @@ C:\Users\Tom\Documents\Visual Studio 2017\valiunas-tomas\Digital\Digital.API\obj
 C:\Users\Tom\Documents\Visual Studio 2017\valiunas-tomas\Digital\Digital.API\obj\Debug\netcoreapp2.0\Digital.API.AssemblyInfo.cs
 C:\Users\Tom\Documents\Visual Studio 2017\valiunas-tomas\Digital\Digital.API\obj\Debug\netcoreapp2.0\Digital.API.dll
 C:\Users\Tom\Documents\Visual Studio 2017\valiunas-tomas\Digital\Digital.API\obj\Debug\netcoreapp2.0\Digital.API.pdb
+C:\Users\Tom\Documents\Visual Studio 2017\valiunas-tomas\Digital\Digital.API\bin\Debug\netcoreapp2.0\Digital.Contracts.dll
+C:\Users\Tom\Documents\Visual Studio 2017\valiunas-tomas\Digital\Digital.API\bin\Debug\netcoreapp2.0\Digital.Database.dll
+C:\Users\Tom\Documents\Visual Studio 2017\valiunas-tomas\Digital\Digital.API\bin\Debug\netcoreapp2.0\Digital.Database.pdb
+C:\Users\Tom\Documents\Visual Studio 2017\valiunas-tomas\Digital\Digital.API\bin\Debug\netcoreapp2.0\Digital.Contracts.pdb

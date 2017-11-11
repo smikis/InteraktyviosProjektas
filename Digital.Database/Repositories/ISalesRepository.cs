@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using Digital.API.Models;
+﻿using Digital.Contracts;
+using System.Collections.Generic;
 
-namespace Digital.API.Data
+namespace Digital.Database.Repositories
 {
     public interface ISalesRepository
     {

@@ -1,9 +1,9 @@
-﻿using Digital.API.Models;
+﻿using Digital.Contracts;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 
-namespace Digital.API.Data
+namespace Digital.Database.Repositories
 {
     public class SalesRepository : IDisposable, ISalesRepository
     {

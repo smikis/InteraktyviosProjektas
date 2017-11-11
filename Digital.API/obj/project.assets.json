@@ -3551,6 +3551,35 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
+      },
+      "Digital.Contracts/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "dependencies": {
+          "Microsoft.AspNetCore.Identity": "2.0.0",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "2.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Digital.Contracts.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Digital.Contracts.dll": {}
+        }
+      },
+      "Digital.Database/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "dependencies": {
+          "Digital.Contracts": "1.0.0",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "2.0.0",
+          "Microsoft.EntityFrameworkCore": "2.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Digital.Database.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Digital.Database.dll": {}
+        }
       }
     }
   },
@@ -9848,10 +9877,21 @@
         "system.xml.xpath.xdocument.4.3.0.nupkg.sha512",
         "system.xml.xpath.xdocument.nuspec"
       ]
+    },
+    "Digital.Contracts/1.0.0": {
+      "type": "project",
+      "path": "../Digital.Front/Digital.Contracts/Digital.Contracts.csproj",
+      "msbuildProject": "../Digital.Front/Digital.Contracts/Digital.Contracts.csproj"
+    },
+    "Digital.Database/1.0.0": {
+      "type": "project",
+      "path": "../Digital.Database/Digital.Database.csproj",
+      "msbuildProject": "../Digital.Database/Digital.Database.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.0": [
+      "Digital.Database >= 1.0.0",
       "Microsoft.ApplicationInsights.AspNetCore >= 2.1.1",
       "Microsoft.AspNetCore >= 2.0.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 2.0.0",
@@ -9898,7 +9938,11 @@
       },
       "frameworks": {
         "netcoreapp2.0": {
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Tom\\Documents\\Visual Studio 2017\\valiunas-tomas\\Digital\\Digital.Database\\Digital.Database.csproj": {
+              "projectPath": "C:\\Users\\Tom\\Documents\\Visual Studio 2017\\valiunas-tomas\\Digital\\Digital.Database\\Digital.Database.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System;
-using Digital.API.Models;
+using Digital.Contracts;
 
-namespace Digital.API.Data
+namespace Digital.Database.Repositories
 {
     public interface IProductRepository : IDisposable
     {

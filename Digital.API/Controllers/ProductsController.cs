@@ -15,12 +15,10 @@ namespace Digital.API.Controllers
     [Route("api/Products")]
     public class ProductsController : Controller
     {
-        private readonly IProductRepository _context;
         private readonly IProductsService _productsService;
 
-        public ProductsController(IProductRepository context, IProductsService productsService)
+        public ProductsController(IProductsService productsService)
         {
-            _context = context;
             _productsService = productsService;
         }
 

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using Digital.API.Services;
 using Digital.Database.Repositories;
 using Digital.Contracts;
 
@@ -17,35 +18,31 @@ namespace Digital.API.Controllers
     [Route("api/Sales")]
     public class SalesController : Controller
     {
-        private readonly ISalesRepository _context;
-        private readonly IProductRepository _products;
-        private readonly UserManager<ApplicationUser> _userManager;
-        public SalesController(ISalesRepository context, UserManager<ApplicationUser> userManager, IProductRepository productRepo)
+        private readonly ISalesService _salesService;
+        public SalesController(ISalesService salesService)
         {
-            _products = productRepo;
-            _userManager = userManager;
-            _context = context;
+            _salesService = salesService;
         }
 
         // GET: api/Products
-        [HttpGet]
+        [HttpGet("{page?}/{pageSize?}")]
         [Authorize("Bearer", Roles = "Administrator")]
-        public IActionResult GetSales()
+        public IActionResult GetSales(int page, int pageSize)
         {
-            return Ok(_context.GetSales().Select(sale => new { Id = sale.SaleID, Amount = sale.TotalAmount, Quantity = sale.TotalQuantity, Buyer = sale.Buyer.Email, Date = sale.CreatedDate }));
+            return Ok(_salesService.GetSales(page,pageSize));
         }
 
         // GET: api/Products/5
         [HttpGet("{id}")]
         [Authorize("Bearer", Roles = "Administrator")]
-        public IActionResult Getsale([FromRoute] int id)
+        public IActionResult Getsale(int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var sale = _context.GetSaleByID(id);
+            var sale = _salesService.GetSale(id);
 
             if (sale == null)
             {
@@ -59,86 +56,50 @@ namespace Digital.API.Controllers
         // PUT: api/Products/5
         [HttpPut("{id}")]
         [Authorize("Bearer", Roles = "Administrator")]
-        public IActionResult PutSale([FromRoute] int id, Sale sale)
+        public IActionResult PutSale(int id, [FromBody] Sale sale)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != sale.SaleID)
+            if (_salesService.UpdateSale(id, sale))
             {
-                return BadRequest();
+                return Ok();
             }
 
-            _context.UpdateSale(sale);
-
-            try
-            {
-                _context.Save();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                throw;
-            }
-
-            return Ok();
+            return BadRequest();
         }
 
         // POST: api/Products
-        [HttpPost("[action]")]
+        [HttpPost]
         [Authorize("Bearer", Roles = "User")]
-        public async Task<IActionResult> PostSales([FromBody] List<SaleProduct> products)
+        public async Task<IActionResult> PostSale([FromBody] List<Product> products)
         {
             var userId = HttpContext.User.FindFirst("ID").Value;
-            var userIdd = User.FindAll(ClaimTypes.NameIdentifier);
-            var actualUser = await _userManager.FindByIdAsync(userId);            
-            var sale = new Sale();
-
-            var lines = products.GroupBy(x => x.productID).ToDictionary(y=> y.Key, y=> y.ToList());
-
-            List<SaleLine> saleLines = new List<SaleLine>();
-            foreach(var line in lines)
+            if (await _salesService.CreateSaleAsync(products, userId))
             {
-                var saleLine = new SaleLine();
-                var id = int.Parse(line.Key);
-                saleLine.Product = _products.GetProductByID(id);
-                saleLine.Quantity = line.Value.Count;
-                saleLine.LineTotal = line.Value.Sum(x => x.price);
-                saleLines.Add(saleLine);
+                return Ok();
             }
 
-            sale.Buyer = actualUser;
-            sale.CreatedDate = DateTime.UtcNow;
-            sale.TotalAmount = products.Sum(x => x.price).ToString();
-            sale.TotalQuantity = products.Count.ToString();
-            sale.PurchaseList = saleLines;     
-            _context.InsertSale(sale);
-            _context.Save();
-
-            return CreatedAtAction("GetProduct", new { id = sale.SaleID }, sale);
-            
+            return BadRequest();         
         }
 
         // DELETE: api/Products/5
         [HttpDelete("{id}")]
-        public IActionResult DeleteProduct(int id)
+        public IActionResult DeleteSale(int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var sale = _context.GetSaleByID(id);
-            if (sale == null)
+            if (_salesService.DeleteSale(id))
             {
-                return NotFound();
+                return new EmptyResult();
             }
 
-            _context.DeleteSale(sale.SaleID);
-            _context.Save();
-
-            return Ok(sale);
+            return BadRequest();
         }
     }
 }

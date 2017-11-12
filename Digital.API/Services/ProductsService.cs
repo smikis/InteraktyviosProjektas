@@ -45,6 +45,7 @@ namespace Digital.API.Services
             }
             try
             {
+                //TODO Fix update to fetch object before updating
                 _context.UpdateProduct(product);
             }
             catch (DbException e)

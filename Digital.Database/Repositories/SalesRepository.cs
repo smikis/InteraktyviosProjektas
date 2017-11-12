@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Digital.Database.Repositories
 {
@@ -18,6 +19,11 @@ namespace Digital.Database.Repositories
             return context.Sales.Include("Buyer");
         }
 
+        public IEnumerable<Sale> GetSalesPage(int page, int pageSize)
+        {
+            return context.Sales.Include("Buyer").Include("PurchaseList").Skip((page - 1) * pageSize).Take(pageSize);
+        }
+
         public Sale GetSaleByID(int id)
         {
             return context.Sales.Find(id);
@@ -27,17 +33,27 @@ namespace Digital.Database.Repositories
         public void InsertSale(Sale product)
         {
             context.Sales.Add(product);
+            context.SaveChanges();
         }
 
         public void DeleteSale(int saleID)
         {
-            Sale sale = context.Sales.Find(saleID);
+            Sale sale = context.Sales.Include("PurchaseList").SingleOrDefault(x=> x.SaleID == saleID);
+            if (sale.PurchaseList != null && sale.PurchaseList.Any())
+            {
+                foreach (var salesLine in sale.PurchaseList)
+                {
+                    context.SaleLines.Remove(salesLine);
+                }
+            }          
             context.Sales.Remove(sale);
+            context.SaveChanges();
         }
 
         public void UpdateSale(Sale sale)
         {
             context.Entry(sale).State = EntityState.Modified;
+            context.SaveChanges();
         }
 
         public void Save()

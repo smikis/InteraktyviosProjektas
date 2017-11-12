@@ -10,9 +10,9 @@ using Microsoft.AspNetCore.Identity;
 using Digital.API.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
-using Digital.Database;
 using Digital.Database.Repositories;
 using Digital.Contracts;
+using Digital.Database;
 
 namespace Digital.API
 {
@@ -45,6 +45,7 @@ namespace Digital.API
             services.AddTransient<ITokenService, TokenService>();
             services.AddTransient<IRolesService, RolesService>();
             services.AddTransient<IProductsService, ProductsService>();
+            services.AddTransient<ISalesService, SalesService>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         .AddJwtBearer(options => {

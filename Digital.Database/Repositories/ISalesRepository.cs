@@ -12,5 +12,6 @@ namespace Digital.Database.Repositories
         void InsertSale(Sale product);
         void Save();
         void UpdateSale(Sale sale);
+        IEnumerable<Sale> GetSalesPage(int page, int pageSize);
     }
 }

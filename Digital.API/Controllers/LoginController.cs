@@ -27,7 +27,7 @@ namespace Digital.API.Controllers
         }
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Login(Login model)
+        public async Task<IActionResult> Login([FromBody] Login model)
         {
             if (ModelState.IsValid)
             {

@@ -7,6 +7,7 @@ using System.IO;
 using Microsoft.AspNetCore.Authorization;
 using Digital.Contracts;
 using Digital.Database.Repositories;
+using Digital.API.Services;
 
 namespace Digital.API.Controllers
 {
@@ -15,103 +16,73 @@ namespace Digital.API.Controllers
     public class ProductsController : Controller
     {
         private readonly IProductRepository _context;
+        private readonly IProductsService _productsService;
 
-        public ProductsController(IProductRepository context)
+        public ProductsController(IProductRepository context, IProductsService productsService)
         {
             _context = context;
+            _productsService = productsService;
         }
 
         // GET: api/Products
-        [HttpGet]
-        public IEnumerable<Product> GetProducts()
+        [HttpGet("{page?}/{pageSize?}")]
+        public IEnumerable<Product> GetProducts(int page, int pageSize, string searchTerm)
         {
-            return _context.GetProductsWithouImages();
+            return _productsService.GetProducts(page,pageSize,searchTerm);
         }
 
         // GET: api/Products/5
         [HttpGet("{id}")]
-        public IActionResult GetProduct([FromRoute] int id)
+        public IActionResult GetProduct(int id)
         {
-            if (!ModelState.IsValid)
+            var product = _productsService.GetProduct(id);
+            if (product != null)
             {
-                return BadRequest(ModelState);
+                return Ok(product);
             }
-
-            var product = _context.GetProductByID(id);
-
-            if (product == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(new
-            {
-                name = product.Name,
-                description = product.Description,
-                price = product.Price,
-                quantity = product.Quantity
-            }
-            );
+            return BadRequest();
         }
-
+        //TODO Create new controller for images
         [HttpGet("[action]/{id}")]
-        public IActionResult GetProductImage([FromRoute] int id)
+        public IActionResult GetProductImage(int id)
         {
-            var image = _context.GetProductImage(id);
-            if(image != null)
-            {
-                return File(image, "image/png");
-            }
-            return File(System.IO.File.ReadAllBytes("ClientApp/Images/images.jpg"), "image/png");
-
+            return File(_productsService.GetProductImage(id), "image/png");
         }
 
         // PUT: api/Products/5
         [HttpPut("{id}")]
         [Authorize("Bearer", Roles = "Administrator")]
-        public IActionResult PutProduct([FromRoute] int id, Product product)
+        public IActionResult PutProduct(int id, [FromBody] Product product)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != product.ProductID)
+            if (_productsService.UpdateProduct(id, product))
             {
-                return BadRequest();
+                return Ok(product);
             }
-
-            _context.UpdateProduct(product);
-
-            try
-            {
-                _context.Save();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                throw;
-            }
-
-            return Ok();
+            
+            return BadRequest();
         }
 
         // POST: api/Products
         [HttpPost]
         [Authorize("Bearer", Roles = "Administrator")]
-        public IActionResult PostProduct([FromBody]Product product, [FromForm] IFormFile file)
+        public IActionResult PostProduct(Product product, IFormFile file)
         {
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+            if (_productsService.CreateProduct(product, file))
+            {
+                return Created($"/api/Products/{product.ProductID}", product);
+            }
 
-            product.CreateDate = DateTime.UtcNow;
-            product.Image = GetImageBytes(file);
-            _context.InsertProduct(product);
-            _context.Save();
-
-            return CreatedAtAction("GetProduct", new { id = product.ProductID }, product);
+            return BadRequest();
         }
 
         // DELETE: api/Products/5
@@ -124,28 +95,13 @@ namespace Digital.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            var product = _context.GetProductByID(id);
-            if (product == null)
+            if (_productsService.DeleteProduct(id))
             {
-                return NotFound();
+                return new EmptyResult();
             }
 
-            _context.DeleteProduct(product.ProductID);
-            _context.Save();
-
-            return Ok(product);
-        }
-
-        private byte[] GetImageBytes(IFormFile file)
-        {
-            using (var fileStream = file.OpenReadStream())
-            using (var ms = new MemoryStream())
-            {
-                fileStream.CopyTo(ms);
-                var fileBytes = ms.ToArray();
-                return fileBytes;
-            }
-        }
+            return BadRequest();
+        }     
 
 
     }

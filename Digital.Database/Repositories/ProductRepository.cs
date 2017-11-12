@@ -26,6 +26,24 @@ namespace Digital.Database.Repositories
             return products;
         }
 
+        public IEnumerable<Product> GetProductsPage(int page, int pageSize, string searchTerm, Category category)
+        {
+            IQueryable<Product> products = context.Products;
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                products = products.Where(x => x.Name.Contains(searchTerm) || x.Description.Contains(searchTerm));
+            }
+
+            if (category != null)
+            {
+                products = products.Where(x => x.Category.CategoryID == category.CategoryID);
+            }
+            var productsResult = products.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            productsResult.ForEach(x => x.Image = null);
+            return productsResult;
+        }
+       
+
 
         public Product GetProductByID(int id)
         {
@@ -40,17 +58,20 @@ namespace Digital.Database.Repositories
         public void InsertProduct(Product product)
         {
             context.Products.Add(product);
+            context.SaveChanges();
         }
 
-        public void DeleteProduct(int productID)
+        public void DeleteProduct(int productId)
         {
-            Product Product = context.Products.Find(productID);
-            context.Products.Remove(Product);
+            Product product = context.Products.Find(productId);
+            context.Products.Remove(product);
+            context.SaveChanges();
         }
 
         public void UpdateProduct(Product product)
         {
             context.Entry(product).State = EntityState.Modified;
+            context.SaveChanges();
         }
 
         public void Save()
@@ -58,18 +79,18 @@ namespace Digital.Database.Repositories
             context.SaveChanges();
         }
 
-        private bool disposed = false;
+        private bool _disposed = false;
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!this.disposed)
+            if (!_disposed)
             {
                 if (disposing)
                 {
                     context.Dispose();
                 }
             }
-            this.disposed = true;
+            _disposed = true;
         }
 
         public void Dispose()

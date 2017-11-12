@@ -44,6 +44,7 @@ namespace Digital.API
             services.AddTransient<ISalesRepository, SalesRepository>();
             services.AddTransient<ITokenService, TokenService>();
             services.AddTransient<IRolesService, RolesService>();
+            services.AddTransient<IProductsService, ProductsService>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         .AddJwtBearer(options => {

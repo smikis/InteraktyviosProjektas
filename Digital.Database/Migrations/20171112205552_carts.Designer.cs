@@ -11,8 +11,8 @@ using System;
 namespace Digital.Database.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20171112172201_new")]
-    partial class @new
+    [Migration("20171112205552_carts")]
+    partial class carts
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -76,12 +76,31 @@ namespace Digital.Database.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("Digital.Contracts.Cart", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreateDate");
+
+                    b.Property<DateTime>("ModifyDate");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Carts");
+                });
+
             modelBuilder.Entity("Digital.Contracts.Category", b =>
                 {
                     b.Property<int>("CategoryID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("CategoryName");
+                    b.Property<string>("CategoryName")
+                        .IsRequired();
 
                     b.HasKey("CategoryID");
 
@@ -145,6 +164,8 @@ namespace Digital.Database.Migrations
                     b.Property<string>("SaleLineID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("CartId");
+
                     b.Property<double>("LineTotal");
 
                     b.Property<int?>("ProductID");
@@ -154,6 +175,8 @@ namespace Digital.Database.Migrations
                     b.Property<int?>("SaleID");
 
                     b.HasKey("SaleLineID");
+
+                    b.HasIndex("CartId");
 
                     b.HasIndex("ProductID");
 
@@ -270,6 +293,13 @@ namespace Digital.Database.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Digital.Contracts.Cart", b =>
+                {
+                    b.HasOne("Digital.Contracts.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
             modelBuilder.Entity("Digital.Contracts.Product", b =>
                 {
                     b.HasOne("Digital.Contracts.Category", "Category")
@@ -290,6 +320,10 @@ namespace Digital.Database.Migrations
 
             modelBuilder.Entity("Digital.Contracts.SaleLine", b =>
                 {
+                    b.HasOne("Digital.Contracts.Cart")
+                        .WithMany("ProductLines")
+                        .HasForeignKey("CartId");
+
                     b.HasOne("Digital.Contracts.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductID");

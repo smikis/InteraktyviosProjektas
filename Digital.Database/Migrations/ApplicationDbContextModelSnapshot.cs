@@ -77,7 +77,7 @@ namespace Digital.Database.Migrations
 
             modelBuilder.Entity("Digital.Contracts.Cart", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("CreateDate");
@@ -163,7 +163,7 @@ namespace Digital.Database.Migrations
                     b.Property<string>("SaleLineID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("CartId");
+                    b.Property<int?>("CartId");
 
                     b.Property<double>("LineTotal");
 

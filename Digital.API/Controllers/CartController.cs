@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Digital.API.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Digital.Contracts;
@@ -9,39 +10,70 @@ namespace Digital.API.Controllers
     [Route("api/Cart")]
     public class CartController : Controller
     {
+        private readonly ICartService _cartService;
+        public CartController(ICartService cartService)
+        {
+            _cartService = cartService;
+        }
+        
         // GET: api/Cart
         [HttpGet]
         public IEnumerable<Cart> Get()
         {
-            return new Cart[] { new Cart { Id = "New"} };
+            return _cartService.GetCarts();
         }
 
         // GET: api/Cart/5
-        [HttpGet("{id}", Name = "Get")]
-        public Cart Get(string id)
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
         {
-            return new Cart { Id = "New get one" };
+            var cart = _cartService.GetCart(id);
+            if (cart != null)
+            {
+                return Ok(cart);
+            }
+            return NotFound();
         }
         
         // POST: api/Cart
         [HttpPost]
-        public StatusCodeResult Post([FromBody]Cart value)
+        public IActionResult Post([FromBody]Cart value)
         {
-            return new StatusCodeResult(StatusCodes.Status201Created);
+            if (_cartService.InsertCart(value))
+            {
+                return Created($"/api/carts{value.Id}",value);
+            }
+            return BadRequest();
         }
         
         // PUT: api/Cart/5
         [HttpPut("{id}")]
-        public StatusCodeResult Put(string id, [FromBody]Cart value)
+        public StatusCodeResult Put(int id, [FromBody]Cart value)
         {
-            return new StatusCodeResult(StatusCodes.Status204NoContent);
+            if (!_cartService.CartExists(id))
+            {
+                return NotFound();
+            }
+            if (_cartService.UpdateCart(id, value))
+            {
+                return Ok();
+            }
+            return BadRequest();
         }
         
         // DELETE: api/Cart/5
         [HttpDelete("{id}")]
-        public StatusCodeResult Delete(string id)
+        public StatusCodeResult Delete(int id)
         {
-            return new StatusCodeResult(StatusCodes.Status204NoContent);
+            if (!_cartService.CartExists(id))
+            {
+                return NotFound();
+            }
+            if (_cartService.DeleteCart(id))
+            {
+                return Ok();
+            }
+            return BadRequest();
         }
     }
 }

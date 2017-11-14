@@ -29,7 +29,7 @@ namespace Digital.API.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Register(Register model)
+        public async Task<IActionResult> Register([FromBody] Register model)
         {          
             if (ModelState.IsValid)
             {

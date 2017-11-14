@@ -26,7 +26,7 @@ namespace Digital.API.Controllers
 
         // GET: api/Products
         [HttpGet("{page?}/{pageSize?}")]
-        [Authorize("Bearer", Roles = "Administrator")]
+        [Authorize("Bearer", Roles = "User")]
         public IActionResult GetSales(int page, int pageSize)
         {
             return Ok(_salesService.GetSales(page,pageSize));

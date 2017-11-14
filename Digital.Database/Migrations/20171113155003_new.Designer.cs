@@ -11,8 +11,8 @@ using System;
 namespace Digital.Database.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20171112205552_carts")]
-    partial class carts
+    [Migration("20171113155003_new")]
+    partial class @new
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -78,7 +78,7 @@ namespace Digital.Database.Migrations
 
             modelBuilder.Entity("Digital.Contracts.Cart", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("CreateDate");
@@ -164,7 +164,7 @@ namespace Digital.Database.Migrations
                     b.Property<string>("SaleLineID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("CartId");
+                    b.Property<int?>("CartId");
 
                     b.Property<double>("LineTotal");
 

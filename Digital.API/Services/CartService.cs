@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Linq;
 using Digital.Contracts;
+using Digital.Contracts.ViewModels;
 using Digital.Database.Repositories;
 
 namespace Digital.API.Services
@@ -35,18 +37,18 @@ namespace Digital.API.Services
             }
         }
 
-        public bool UpdateCart(int id, Cart cart)
-        {
-            cart.ModifyDate = DateTime.UtcNow;           
-            if (id != cart.Id)
-            {
-                return false;
-            }
+        public bool UpdateCart(int id, CartModel cartModel)
+        {      
             try
             {
-                var oldCart = _context.GetCartById(cart.Id);
-                oldCart.ProductLines = cart.ProductLines;
-                _context.UpdateCart(cart);
+                var oldCart = _context.GetCartById(id);
+                oldCart.ModifyDate = DateTime.Now;
+
+                var productLines = cartModel.ProductLines.Select(x =>
+                    new ProductLine {Quantity = x.Quantity, Product = _productRepo.GetProductByID(x.Product)});
+
+                oldCart.ProductLines = productLines.ToList();
+                _context.UpdateCart(oldCart);
             }
             catch (DbException e)
             {
@@ -56,20 +58,27 @@ namespace Digital.API.Services
             return true;
         }
 
-        public bool InsertCart(Cart cart)
+        public int InsertCart(CartModel cartModel)
         {
-            cart.CreateDate = DateTime.UtcNow;
-            cart.ModifyDate = DateTime.UtcNow;
+            var cart = new Cart
+            {
+                CreateDate = DateTime.UtcNow,
+                ModifyDate = DateTime.UtcNow
+            };
+
+            
             try
-            {               
-                _context.InsertCart(cart);
+            {
+                var productLines = cartModel.ProductLines.Select(x =>
+                    new ProductLine { Quantity = x.Quantity, Product = _productRepo.GetProductByID(x.Product) });
+                cart.ProductLines = productLines.ToList();
+                   return  _context.InsertCart(cart);
             }
             catch (DbException e)
             {
                 //TODO Add logging
-                return false;
+                return -1;
             }
-            return true;
         }
 
         public bool DeleteCart(int id)

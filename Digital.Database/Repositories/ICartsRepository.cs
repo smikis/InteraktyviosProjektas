@@ -7,7 +7,7 @@ namespace Digital.Database.Repositories
     {
         IEnumerable<Cart> GetCarts();
         Cart GetCartById(int id);
-        void InsertCart(Cart cart);
+        int InsertCart(Cart cart);
         void DeleteCart(int cartId);
         void UpdateCart(Cart product);
         void Dispose();

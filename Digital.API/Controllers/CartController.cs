@@ -3,6 +3,7 @@ using Digital.API.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Digital.Contracts;
+using Digital.Contracts.ViewModels;
 
 namespace Digital.API.Controllers
 {
@@ -37,18 +38,19 @@ namespace Digital.API.Controllers
         
         // POST: api/Cart
         [HttpPost]
-        public IActionResult Post([FromBody]Cart value)
+        public IActionResult Post([FromBody]CartModel value)
         {
-            if (_cartService.InsertCart(value))
+            var id = _cartService.InsertCart(value);
+            if (id != -1 )
             {
-                return Created($"/api/carts{value.Id}",value);
+                return Created($"/api/carts{id}",id);
             }
             return BadRequest();
         }
         
         // PUT: api/Cart/5
         [HttpPut("{id}")]
-        public StatusCodeResult Put(int id, [FromBody]Cart value)
+        public StatusCodeResult Put(int id, [FromBody]CartModel value)
         {
             if (!_cartService.CartExists(id))
             {

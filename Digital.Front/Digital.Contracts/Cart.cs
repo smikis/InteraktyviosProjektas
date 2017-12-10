@@ -11,7 +11,7 @@ namespace Digital.Contracts
         [Key]
         public int Id { get; set; }
         public ApplicationUser User { get; set; }
-        public List<SaleLine> ProductLines {get;set;}
+        public List<ProductLine> ProductLines {get;set;}
         public DateTime CreateDate { get; set; }
         public DateTime ModifyDate { get; set; }
     }

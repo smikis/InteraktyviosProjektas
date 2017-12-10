@@ -25,10 +25,11 @@ namespace Digital.Database.Repositories
             return _context.Carts.Find(id);
         }
 
-        public void InsertCart(Cart cart)
+        public int InsertCart(Cart cart)
         {
             _context.Carts.Add(cart);
             _context.SaveChanges();
+            return cart.Id;
         }
 
         public void DeleteCart(int cartId)
@@ -38,7 +39,7 @@ namespace Digital.Database.Repositories
             {
                 foreach (var salesLine in cart.ProductLines)
                 {
-                    _context.SaleLines.Remove(salesLine);
+                    _context.ProductLines.Remove(salesLine);
                 }
             }
             _context.Carts.Remove(cart);
@@ -53,7 +54,7 @@ namespace Digital.Database.Repositories
             {
                 foreach (var salesLine in product.ProductLines)
                 {      
-                    _context.SaleLines.Update(salesLine);
+                    _context.ProductLines.Update(salesLine);
                 }
             }
             _context.Carts.Update(cart);

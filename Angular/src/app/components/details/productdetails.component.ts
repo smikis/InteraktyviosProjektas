@@ -5,9 +5,7 @@ import { ShoppingCartService } from '../../_services/cart.service';
 import { Product } from '../../classes/product';
 @Component({
     selector: 'productDetails',
-    template: require('./productdetails.component.html'),
-    providers: [
-        ShoppingCartService]
+    template: require('./productdetails.component.html')
 })
 export class ProductDetailsComponent {
     id: number;

@@ -1,22 +1,28 @@
-﻿<div class="container">
-    <h1>Login</h1>
-    <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" required [(ngModel)]="model.email" name="email" #email="ngModel" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
-            <div *ngIf="email.hasError('required') && (email.touched || email.dirty)" class="alert alert-danger">You must include email.</div>
-            <div *ngIf="email.hasError('pattern') && email.touched" class="alert alert-danger">Email is invalid</div>
-        </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" minlength="6" maxlength="50" required [(ngModel)]="model.password" name="password" #password="ngModel">           
-        </div>       
-        <div class="form-group error-message text-danger">
-            <div *ngFor="let error of Errors">
-                <span class="text-center">{{error}}</span>
+﻿<mat-card class="col-md-4 col-md-offset-4 col-sm-12">
+        <mat-toolbar>
+          <div class="md-toolbar-tools">
+            <h2><span>Login</span></h2>
+          </div>
+        </mat-toolbar>
+        <mat-card-content>
+        <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
+                <div layout="row">
+                <mat-form-field class="full-width" >
+                        <input matInput placeholder="Email" id="email" required  [(ngModel)]="model.email" name="email" #email="ngModel" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+                        <mat-error *ngIf="email.hasError('required') && (email.touched || email.dirty)">
+                                You must include email.
+                        </mat-error>
+                        <mat-error *ngIf="email.hasError('pattern') && email.touched">
+                                Email is invalid.
+                        </mat-error>
+                </mat-form-field>
             </div>
-        </div>
-        <button type="submit" class="btn btn-success" [disabled]="!registerForm.valid">Submit</button>
-    </form>
-</div>
-
+            <div layout="row">
+                <mat-form-field class="full-width">
+                        <input matInput placeholder="Password" type="password"  id="password" minlength="6" maxlength="50" required [(ngModel)]="model.password" name="password" #password="ngModel">                                       
+                </mat-form-field>
+            </div>
+            <button mat-button type="submit" class="btn btn-success" [disabled]="!registerForm.valid">Submit</button>
+          </form>
+        </mat-card-content>
+      </mat-card>

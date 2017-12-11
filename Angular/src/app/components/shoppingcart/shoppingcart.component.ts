@@ -8,9 +8,7 @@ import { Http, Headers } from '@angular/http';
 import { NguiPopupComponent, NguiMessagePopupComponent } from "@ngui/popup/dist";
 @Component({
     selector: 'shoppingCart',
-    templateUrl: './shoppingcart.component.html',
-    providers: [
-        ShoppingCartService]
+    templateUrl: './shoppingcart.component.html'
 })
 export class ShoppingCartComponent implements OnInit {
     Settings : any;

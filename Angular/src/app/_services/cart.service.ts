@@ -9,13 +9,14 @@ export class ShoppingCartService {
     private productsInCart: Product[] = [];
 
     constructor() {
+        console.log("constructor");
         this.productsInCartSubject.subscribe(_ => this.productsInCart = _);
     }
 
     public addToCart(item: Product) {
         console.log("Adding to cart service");
         this.productsInCartSubject.next([...this.productsInCart, item]);
-       // console.log(this.productsInCartSubject);
+        console.log(this.productsInCartSubject);
     }
 
     public getItemCount(item: Product) {
@@ -29,6 +30,8 @@ export class ShoppingCartService {
     }
 
     public getItems(): Observable<Product[]> {
+        console.log("getItems");
+        console.log(this.productsInCartSubject);
         return this.productsInCartSubject;
     }
 

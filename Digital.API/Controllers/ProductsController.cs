@@ -68,14 +68,14 @@ namespace Digital.API.Controllers
         // POST: api/Products
         [HttpPost]
         [Authorize("Bearer", Roles = "Administrator")]
-        public IActionResult PostProduct(Product product, IFormFile file)
+        public IActionResult PostProduct([FromBody] Product product)
         {
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            if (_productsService.CreateProduct(product, file))
+            if (_productsService.CreateProduct(product))
             {
                 return Created($"/api/Products/{product.ProductID}", product);
             }

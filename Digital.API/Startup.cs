@@ -71,6 +71,14 @@ namespace Digital.API
                     .RequireAuthenticatedUser().Build());
             });
             services.AddMvc();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -79,7 +87,9 @@ namespace Digital.API
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
             app.UseAuthentication();
+            app.UseCors("CorsPolicy");
             app.UseMvc();
+            
         }
     }
 }

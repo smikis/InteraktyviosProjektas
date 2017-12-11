@@ -9,7 +9,7 @@ namespace Digital.API.Services
         Product GetProduct(int id);
         byte[] GetProductImage(int id);
         bool UpdateProduct(int id, Product product);
-        bool CreateProduct(Product product, IFormFile file);
+        bool CreateProduct(Product product);
         bool DeleteProduct(int id);
         IEnumerable<Product> GetProducts(int page, int pageSize, string searchTerm);
     }

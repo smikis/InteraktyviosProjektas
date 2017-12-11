@@ -3,15 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Digital", "Digital.csproj", "{8B3E5790-21B8-4F78-B404-9CEF70494285}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Digital.API", "..\Digital.API\Digital.API.csproj", "{82EF66D5-FBF4-4AE5-80D4-767DAAFC8624}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Digital.Test", "..\Digital.Test\Digital.Test.csproj", "{749BB171-8E97-4ADE-91D0-87C5C44CC5F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Digital.Database", "..\Digital.Database\Digital.Database.csproj", "{9E37F3D9-465D-45A1-A250-DCA6D8BB4408}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Digital.Database", "..\Digital.Database\Digital.Database.csproj", "{9E37F3D9-465D-45A1-A250-DCA6D8BB4408}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Digital.Contracts", "Digital.Contracts\Digital.Contracts.csproj", "{EC691257-801A-4E6B-B021-04D080675E3C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Digital.Contracts", "Digital.Contracts\Digital.Contracts.csproj", "{AB92FBAC-5029-49E7-AEC3-49AF59F3406D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8B3E5790-21B8-4F78-B404-9CEF70494285}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8B3E5790-21B8-4F78-B404-9CEF70494285}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8B3E5790-21B8-4F78-B404-9CEF70494285}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8B3E5790-21B8-4F78-B404-9CEF70494285}.Release|Any CPU.Build.0 = Release|Any CPU
 		{82EF66D5-FBF4-4AE5-80D4-767DAAFC8624}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{82EF66D5-FBF4-4AE5-80D4-767DAAFC8624}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{82EF66D5-FBF4-4AE5-80D4-767DAAFC8624}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -35,10 +29,10 @@ Global
 		{9E37F3D9-465D-45A1-A250-DCA6D8BB4408}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E37F3D9-465D-45A1-A250-DCA6D8BB4408}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E37F3D9-465D-45A1-A250-DCA6D8BB4408}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EC691257-801A-4E6B-B021-04D080675E3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EC691257-801A-4E6B-B021-04D080675E3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EC691257-801A-4E6B-B021-04D080675E3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EC691257-801A-4E6B-B021-04D080675E3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB92FBAC-5029-49E7-AEC3-49AF59F3406D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB92FBAC-5029-49E7-AEC3-49AF59F3406D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB92FBAC-5029-49E7-AEC3-49AF59F3406D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB92FBAC-5029-49E7-AEC3-49AF59F3406D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -23,6 +23,7 @@
     ".NETCoreApp,Version=v2.0": {
       "Digital.API/1.0.0": {
         "dependencies": {
+          "Digital.Contracts": "1.0.0",
           "Digital.Database": "1.0.0",
           "Microsoft.ApplicationInsights.AspNetCore": "2.1.1",
           "Microsoft.AspNetCore": "2.0.0",

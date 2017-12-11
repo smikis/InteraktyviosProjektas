@@ -1,0 +1,24 @@
+﻿<div class="col-sm-3">
+    <article class="col-item">
+        <div class="photo">
+            <a href="#"> <img src="{{imageLink}}" class="img-responsive" alt="Product Image" /> </a>
+        </div>
+        <div class="info">
+            <div class="row">
+                <div class="price-details col-md-6">
+                    <p class="details">
+                        {{(description.length>100)? (description | slice:0:100)+'..':(description)}}
+                    </p>
+                    <h1 class="font-weight-bold"><b>{{name}}</b> </h1>
+                    <span class="price-new">{{price}}€</span>
+                </div>
+            </div>
+            <div class="separator">
+                <p class="btn-add">
+                    <i class="fa fa-info"></i><a (click)="onDetailsClick()" class="hidden-sm">Details</a>
+                </p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </article>
+</div>

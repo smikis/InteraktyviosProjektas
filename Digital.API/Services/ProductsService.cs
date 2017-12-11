@@ -56,13 +56,9 @@ namespace Digital.API.Services
             return true;
         }
 
-        public bool CreateProduct(Product product, IFormFile file)
+        public bool CreateProduct(Product product)
         {
-            product.CreateDate = DateTime.UtcNow;
-            if (file != null)
-            {
-                product.Image = GetImageBytes(file);
-            }
+            product.CreateDate = DateTime.UtcNow;          
             try
             {
                 _context.InsertProduct(product);

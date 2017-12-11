@@ -32,6 +32,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Digital.Database\Digital.Database.csproj" />
+    <ProjectReference Include="..\Digital.Front\Digital.Contracts\Digital.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

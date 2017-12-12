@@ -1,6 +1,10 @@
 ﻿/* font Awesome http://fontawesome.io*/
 @import url(//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css);
+@import url('https://fonts.googleapis.com/css?family=Adamina');
 
+.name {
+  font-family: 'Adamina';
+}
 
 .col-item {
   border: 1px solid #E1E1E1;

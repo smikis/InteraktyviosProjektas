@@ -7,6 +7,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { NguiPopupModule } from '@ngui/popup';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { DataTableModule } from "angular2-datatable";
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import {
   MatAutocompleteModule,
   MatButtonModule,
@@ -111,6 +112,7 @@ import { OrdersListComponent } from './components/orederslist/orderslist.compone
     MatToolbarModule,
     MatTooltipModule,
     BrowserAnimationsModule,
+    Ng4LoadingSpinnerModule.forRoot(),
     RouterModule.forRoot([
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },

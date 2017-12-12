@@ -1,6 +1,7 @@
 ﻿import { Component, Input, Inject, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Http, Headers } from "@angular/http";
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { NguiPopupComponent, NguiMessagePopupComponent } from "@ngui/popup/dist";
 @Component({
     selector: 'product-list',
@@ -15,14 +16,16 @@ export class ProductListComponent {
     public sortBy = "name";
     public sortOrder = "asc";
 
-    constructor(private http: Http) {
+    constructor(private http: Http, private spinnerService: Ng4LoadingSpinnerService) {
         const settings = require( '../../classes/settings' );
         this.Settings = settings.Settings;  
     }
 
     ngOnInit(): void {
+        this.spinnerService.show();
         this.http.get(this.Settings.ORIGIN_URL + '/api/Products/').subscribe(result => {
             this.data = result.json();
+            this.spinnerService.hide();
         });
     }
 

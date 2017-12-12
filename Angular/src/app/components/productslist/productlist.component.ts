@@ -16,7 +16,7 @@ export class ProductListComponent {
     public sortBy = "name";
     public sortOrder = "asc";
 
-    constructor(private http: Http, private spinnerService: Ng4LoadingSpinnerService) {
+    constructor(private http: Http, private router: Router, private spinnerService: Ng4LoadingSpinnerService) {
         const settings = require( '../../classes/settings' );
         this.Settings = settings.Settings;  
     }
@@ -31,6 +31,7 @@ export class ProductListComponent {
 
     edit(item) {
         console.log(item);
+        this.router.navigate(['/editProduct/' + item.productID]);
     }
 
     delete(item) {

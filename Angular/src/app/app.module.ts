@@ -57,6 +57,7 @@ import { ProductListComponent } from './components/productslist/productlist.comp
 import { UsersListComponent } from './components/userslist/userslist.component';
 import { ShoppingCartComponent } from './components/shoppingcart/shoppingcart.component';
 import { OrdersListComponent } from './components/orederslist/orderslist.component';
+import { EditProductComponent } from './components/editProduct/editProduct.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { OrdersListComponent } from './components/orederslist/orderslist.compone
     ProductListComponent,
     UsersListComponent,
     ShoppingCartComponent,
-    OrdersListComponent  
+    OrdersListComponent,
+    EditProductComponent  
   ],
   imports: [
     BrowserModule,
@@ -124,6 +126,7 @@ import { OrdersListComponent } from './components/orederslist/orderslist.compone
       { path: 'cart', component: ShoppingCartComponent },
       { path: 'orders', component: OrdersListComponent },
       { path: 'productDetails/:id', component: ProductDetailsComponent },
+      { path: 'editProduct/:id', component: EditProductComponent },
       { path: '**', redirectTo: 'home' }
   ])   
   ],

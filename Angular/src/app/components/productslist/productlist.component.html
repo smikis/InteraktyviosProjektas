@@ -6,8 +6,11 @@
             <table class="table table-striped" [mfData]="data" #mf="mfDataTable"
                    [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
                 <thead>
-                    <tr>                  
-                        <th style="width: 40%">
+                    <tr> 
+                        <th style="width: 10%">
+                         <mfDefaultSorter by="productID">Product ID</mfDefaultSorter>
+                        </th>                 
+                        <th style="width: 30%">
                             <mfDefaultSorter by="name">Name</mfDefaultSorter>
                         </th>
                         <th style="width: 20%">
@@ -28,7 +31,8 @@
                 </thead>
                
                 <tbody>
-                    <tr *ngFor="let item of mf.data">                       
+                    <tr *ngFor="let item of mf.data">
+                        <td>{{item.productID}}</td>                      
                         <td>{{item.name}}</td>
                         <td>{{item.price}}</td>
                         <td>{{item.quantity}}</td>

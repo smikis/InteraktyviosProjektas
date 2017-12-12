@@ -43,6 +43,10 @@ namespace Digital.API.Services
             {
                 return false;
             }
+            if (product.File != null)
+            {
+                product.Image = Convert.FromBase64String(product.File.Value);
+            }
             try
             {
                 //TODO Fix update to fetch object before updating

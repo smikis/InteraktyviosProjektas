@@ -20,6 +20,7 @@
 }
 .col-item .photo img {
   margin: 0 auto;
+  height: 400px;
   width: 100%;
 }
 

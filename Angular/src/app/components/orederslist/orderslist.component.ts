@@ -23,9 +23,9 @@ export class OrdersListComponent {
     ngOnInit(): void {
         let headers = new Headers();
         headers.append("Authorization", "Bearer " + sessionStorage.getItem("token"));
-        this.http.get(this.Settings.ORIGIN_URL + '/api/Sales/', { headers: headers }).subscribe(result => {
-             
+        this.http.get(this.Settings.ORIGIN_URL + '/api/Sales/', { headers: headers }).subscribe(result => {            
             this.data = result.json();
+            console.log(this.data);
         });
     }
 

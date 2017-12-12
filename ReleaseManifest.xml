@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Manifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <parentProduct>Test</parentProduct>
+  <sourceControlProvider>Git</sourceControlProvider>
+  <sourceControlLocation>https://github.com/smikis/InteraktyviosProjektas</sourceControlLocation>
+  <buildServerType>Jenkins</buildServerType>
+  <buildServerUrl>http://vswvrnjenkins01:8080</buildServerUrl>
+  <packages>
+    <package>
+      <name>Digital</name>
+      <projectName>Digital</projectName>
+      <version>1.0.0.1</version>
+      <outputRelativePath>.\Projects\bin\Debug</outputRelativePath>
+    </package>
+  </packages>
+  <user>
+    <email>Tomas.Valiunas@visma.com</email>
+  </user>
+</Manifest>

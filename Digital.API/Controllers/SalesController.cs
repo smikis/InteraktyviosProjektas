@@ -26,10 +26,11 @@ namespace Digital.API.Controllers
 
         // GET: api/Products
         [HttpGet("{page?}/{pageSize?}")]
-        [Authorize("Bearer", Roles = "User")]
+        [Authorize("Bearer", Roles = "Administrator")]
         public IActionResult GetSales(int page, int pageSize)
         {
-            return Ok(_salesService.GetSales(page,pageSize));
+            var sales = _salesService.GetSales(page, pageSize);
+            return Ok(sales);
         }
 
         // GET: api/Products/5

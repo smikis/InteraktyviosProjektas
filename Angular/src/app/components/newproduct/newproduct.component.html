@@ -30,7 +30,7 @@
             <div *ngIf="price.hasError('max') && price.touched" class="alert alert-danger">Maximum price is 9999</div>    
         </div>   
         
-        <input type="file" name="file" (change)="onChange($event)">
+        <input type="file" id="file" name="file" (change)="onChange($event)" #fileInput>
 
         <div class="form-group error-message text-danger">
             <div *ngFor="let error of Errors">

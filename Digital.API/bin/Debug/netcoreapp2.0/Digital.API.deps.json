@@ -3679,7 +3679,7 @@
     "Microsoft.CodeAnalysis.Analyzers/1.1.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-HS3iRWZKcUw/8eZ/08GXKY2Bn7xNzQPzf8gRPHGSowX7u7XXu9i9YEaBeBNKUXWfI7qjvT2zXtLUvbN0hds8vg==",
+      "sha512": "sha512-Rr+E8BcgVemLsJMnbblGP9ZQbMOzLYD1CMnZpiLBIlC1eVXo4g2QkBQCAF9EHd4XZTfHfTpZUpzLtXVx0tOZiA==",
       "path": "microsoft.codeanalysis.analyzers/1.1.0",
       "hashPath": "microsoft.codeanalysis.analyzers.1.1.0.nupkg.sha512"
     },
@@ -4078,7 +4078,7 @@
     "Microsoft.VisualStudio.Web.CodeGeneration.Contracts/2.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-UIlELB0laoUrkGRcMLwUpek6sUXtlxToDsAg0xU4gQvDGYIfe7bBJjka54XBHq/TZEsZ0NipOaFiNQOfRTd2xA==",
+      "sha512": "sha512-rUjm9znJGBdxU35ZVBivnvmTb+R9ZtTBt7aqokfJdM7bjCYaU/qbL8c8dFg1RD96hPxEb3cuGX7g+vADtmM9tQ==",
       "path": "microsoft.visualstudio.web.codegeneration.contracts/2.0.0",
       "hashPath": "microsoft.visualstudio.web.codegeneration.contracts.2.0.0.nupkg.sha512"
     },
@@ -4148,7 +4148,7 @@
     "NuGet.Frameworks/4.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-WCkN68c8q+USG+Ot1MmBDH+9DUo5dk7UB0QDMiwCYhrH7ZoFLKFGGNzJ8C3LTR1DvB1LW9BOxKeznnZznKiCTA==",
+      "sha512": "sha512-hopsAUUz+HVGzSIeT+CDdwywMiJ0O9/21mdr+lwn/sCyJJcoW2yhsHGlbjwNjJM6Kz0vaa8o4LKEoFnvIiSNFQ==",
       "path": "nuget.frameworks/4.0.0",
       "hashPath": "nuget.frameworks.4.0.0.nupkg.sha512"
     },
@@ -4575,7 +4575,7 @@
     "System.Linq.Queryable/4.0.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Yn/WfYe9RoRfmSLvUt2JerP0BTGGykCZkQPgojaxgzF2N0oPo+/AhB8TXOpdCcNlrG3VRtsamtK2uzsp3cqRVw==",
+      "sha512": "sha512-71jXUjoT2/uCH2DN5+nkx4BngHrwhuiyKgDQ1X9gcgrcgu2G6GFkDEtCFSDqVgTvCUvTruTkoPClHc7tLdoQPg==",
       "path": "system.linq.queryable/4.0.1",
       "hashPath": "system.linq.queryable.4.0.1.nupkg.sha512"
     },
@@ -4687,7 +4687,7 @@
     "System.Runtime.CompilerServices.Unsafe/4.4.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-9dLLuBxr5GNmOfl2jSMcsHuteEg32BEfUotmmUkmZjpR3RpVHE8YQwt0ow3p6prwA1ME8WqDVZqrr8z6H8G+Kw==",
+      "sha512": "sha512-WtcOV2azr6iAAMsOBqaQh0NlQAKkxfilAyeEm+00RfG40rq0Psz6mg0hlezXgL8Car1eYe17MEQWBhYhrdV9NQ==",
       "path": "system.runtime.compilerservices.unsafe/4.4.0",
       "hashPath": "system.runtime.compilerservices.unsafe.4.4.0.nupkg.sha512"
     },

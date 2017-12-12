@@ -58,7 +58,12 @@ namespace Digital.API.Services
 
         public bool CreateProduct(Product product)
         {
-            product.CreateDate = DateTime.UtcNow;          
+            product.CreateDate = DateTime.UtcNow;
+            if (product.File != null)
+            {
+                product.Image = Convert.FromBase64String(product.File.Value);
+            }
+            
             try
             {
                 _context.InsertProduct(product);

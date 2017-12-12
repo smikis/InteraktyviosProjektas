@@ -20,5 +20,14 @@ namespace Digital.Contracts
         public byte[] Image { get; set; }
         public ApplicationUser CreatedBy { get; set; }
         public Category Category { get; set; }
+        public ReceivedFile File { get; set; }
     }
+
+    public class ReceivedFile
+    {
+        public int Id { get; set; }
+        public string Filename { get; set; }
+        public string Filetype { get; set; }
+        public string Value { get; set; }
+    } 
 }

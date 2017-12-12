@@ -14,7 +14,6 @@ export class NewProductComponent {
     Errors = [
 
     ];
-    file: File;
     constructor(private http: Http, private router: Router) { 
         const settings = require( '../../classes/settings' );
         this.Settings = settings.Settings;    
@@ -38,13 +37,20 @@ export class NewProductComponent {
             });
         });      
     } 
-    onChange(event: EventTarget) {
-        let eventObj: MSInputMethodContext = <MSInputMethodContext>event;
-        let target: HTMLInputElement = <HTMLInputElement>eventObj.target;
-        let files: FileList = target.files;
-        this.file = files[0];
-        console.log(this.file);
-    }
+    onChange(event) {
+        let reader = new FileReader();
+        if(event.target.files && event.target.files.length > 0) {
+          let file = event.target.files[0];
+          reader.readAsDataURL(file);
+          reader.onload = () => {
+            this.model.file = ({
+              filename: file.name,
+              filetype: file.type,
+              value: reader.result.split(',')[1]
+            })
+          };
+        }
+      }
 
 
 }
@@ -54,6 +60,7 @@ class Product {
     Description: string;
     Price: number;
     Quantity: number;
+    file: string|any;
 }
 class Category {
     CategoryID: string;

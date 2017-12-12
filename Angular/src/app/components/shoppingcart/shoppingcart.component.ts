@@ -57,7 +57,7 @@ export class ShoppingCartComponent implements OnInit {
         console.log(this.shoppingCartItems);
         let headers = new Headers();
         headers.append("Authorization", "Bearer " + sessionStorage.getItem("token"));
-        this.http.post(this.Settings.ORIGIN_URL + '/api/Sales/PostSales', this.shoppingCartItems, { headers: headers })
+        this.http.post(this.Settings.ORIGIN_URL + '/api/Sales', this.shoppingCartItems, { headers: headers })
             .subscribe(
             response => {
                 console.log(response);
